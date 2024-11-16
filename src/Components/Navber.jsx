@@ -1,22 +1,27 @@
 // import { useContext } from "react";
-import { Link, NavLink} from "react-router-dom";
+import { Link, NavLink, useNavigate} from "react-router-dom";
 // import { AuthContext } from "../../Auth/AuthProvider";
-import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import useAuth from "../Hooks/useAuth";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 // import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navber = () => {
+    const user = useAuth();
     // const { data } = useAdmin();
     
-    // const navigate = useNavigate();
-    // const { userInfo, logOut } = useContext(AuthContext);
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then(() => {
-    //             toast.success('Log Out')
-    //             navigate('/')
-    //         })
-    // }
+    const navigate = useNavigate();
+    const { userlogOut} = useContext(AuthContext);
+    const handleLogOut = () => {
+        userlogOut()
+            .then(() => {
+                toast.success('Log Out')
+                navigate('/')
+            })
+    }
+console.log('user',user);
 
 
     const items = <>
@@ -25,10 +30,6 @@ const Navber = () => {
     </>
     return (
         <div className="bg-white flex">
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
             <div className="navbar container flex justify-between">
                 <div>
                     <div className="dropdown">
@@ -64,19 +65,19 @@ const Navber = () => {
                         {items}
                     </ul>
                 </div>
-                {/* <div className="flex-none">
+                <div className="flex-none">
                     {
-                        userInfo?.email || <Link to='/register'>
+                        user?.displayName || <Link to='/register'>
                             <button className="button">Register</button>
                         </Link>
                     }
 
-                    {userInfo?.email && <div className="dropdown dropdown-end">
+                    {user?.email && <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
                                     alt="Tailwind CSS Navbar component"
-                                    src={userInfo?.photoURL} />
+                                    src={user?.photoURL} />
 
                             </div>
                         </div>
@@ -84,18 +85,15 @@ const Navber = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li className="mt-3 ">
-                                <span className="text-myBlue font-semibold text-lg hover:bg-white">{userInfo?.displayName}</span>
+                                <span className="text-myBlue text-sm hover:bg-white">{user?.email}</span>
                             </li>
-                            {
+                            {/* {
                                 data?.role === 'Admin' ? <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/admin-dashboard'><button>Admin-dashboard</button></Link></li> : <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/user-dashboard'> My Dashboard </Link></li>
 
-                            }
-                            <li>{userInfo && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
+                            } */}
+                            <li>{user && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
                         </ul>
                     </div>}
-                </div> */}
-                <div>
-                    <Link to='/register'><button className="button">Register</button></Link>
                 </div>
             </div>
         </div>

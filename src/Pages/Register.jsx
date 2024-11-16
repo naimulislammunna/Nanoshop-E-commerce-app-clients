@@ -15,7 +15,7 @@ const Register = () => {
     const {
         register,
         handleSubmit,
-    } = useForm()
+    } = useForm();
 
     const onSubmit = async (data) => {
         const { name, email, password, confirmPassword, role } = data;
