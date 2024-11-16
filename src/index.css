@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Permanent+Marker&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sriracha&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+body{
+  max-width: 1440px;
+  background-color: #F6FDFE;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logo{
+  font-family: "Sriracha", cursive;
+  font-weight: 700;
+}
+.container{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 540px) {
+  .container{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.button{
+  background-color: #2D3663;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 10rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
