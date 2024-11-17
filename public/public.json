@@ -1,0 +1,208 @@
+
+[
+    {
+      "title": "Galaxy S23 Ultra",
+      "brand": "Samsung",
+      "price": 1199.99,
+      "category": "Flagship",
+      "rating": 4.8,
+      "img": "https://i.postimg.cc/4NnhbQPT/16910-NR3-E4-Z.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Phantom Black",
+      "description": {
+        "display": "6.8-inch QHD+ AMOLED, 120Hz",
+        "camera": "200MP + 12MP + 10MP + 10MP",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "12GB",
+        "rom": "512GB"
+      }
+    },
+    {
+      "title": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "price": 1299.99,
+      "category": "Flagship",
+      "rating": 4.9,
+      "img": "https://i.postimg.cc/Qt0HcFWt/180085-OWOO6-B-985.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Natural Titanium",
+      "description": {
+        "display": "6.7-inch Super Retina XDR",
+        "camera": "48MP + 12MP + 12MP",
+        "processor": "A17 Pro",
+        "ram": "8GB",
+        "rom": "1TB"
+      }
+    },
+    {
+      "title": "Pixel 8 Pro",
+      "brand": "Google",
+      "price": 999.99,
+      "category": "Flagship",
+      "rating": 4.7,
+      "img": "https://i.postimg.cc/y6LZZbFP/180086-OWOO69-839.jpg",
+      "email": "musfiq90@gmail.com",
+      "color": "Bay Blue",
+      "description": {
+        "display": "6.7-inch QHD+ LTPO OLED, 120Hz",
+        "camera": "50MP + 48MP + 48MP",
+        "processor": "Google Tensor G3",
+        "ram": "12GB",
+        "rom": "256GB"
+      }
+    },
+    {
+      "title": "OnePlus 11",
+      "brand": "OnePlus",
+      "price": 749.99,
+      "category": "Flagship",
+      "rating": 4.6,
+      "img": "https://i.postimg.cc/3wQ4h5TK/3133095.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Eternal Green",
+      "description": {
+        "display": "6.7-inch QHD+ AMOLED, 120Hz",
+        "camera": "50MP + 48MP + 32MP",
+        "processor": "Snapdragon 8 Gen 2",
+        "ram": "16GB",
+        "rom": "256GB"
+      }
+    },
+    {
+      "title": "Redmi Note 13 Pro",
+      "brand": "Xiaomi",
+      "price": 399.99,
+      "category": "Mid-Range",
+      "rating": 4.5,
+      "img": "https://i.postimg.cc/QtXFBQCw/3181534.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Sky Blue",
+      "description": {
+        "display": "6.67-inch FHD+ AMOLED, 120Hz",
+        "camera": "200MP + 8MP + 2MP",
+        "processor": "Snapdragon 7 Gen 1",
+        "ram": "12GB",
+        "rom": "256GB"
+      }
+    },
+    {
+      "title": "Galaxy A54",
+      "brand": "Samsung",
+      "price": 449.99,
+      "category": "Mid-Range",
+      "rating": 4.3,
+      "img": "https://i.postimg.cc/wTPRWR4R/3207184.jpg",
+      "email": "musfiq90@gmail.com",
+      "color": "Awesome Lime",
+      "description": {
+        "display": "6.4-inch FHD+ Super AMOLED, 120Hz",
+        "camera": "50MP + 12MP + 5MP",
+        "processor": "Exynos 1380",
+        "ram": "8GB",
+        "rom": "128GB"
+      }
+    },
+    {
+      "title": "iPhone SE 2024",
+      "brand": "Apple",
+      "price": 499.99,
+      "category": "Mid-Range",
+      "rating": 4.2,
+      "img": "https://i.postimg.cc/8CdFPKpL/331259-PA4-WHV-213.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Starlight",
+      "description": {
+        "display": "4.7-inch Retina HD",
+        "camera": "12MP",
+        "processor": "A15 Bionic",
+        "ram": "4GB",
+        "rom": "128GB"
+      }
+    },
+    {
+      "title": "Realme GT Neo 5",
+      "brand": "Realme",
+      "price": 599.99,
+      "category": "Mid-Range",
+      "rating": 4.4,
+      "img": "https://i.postimg.cc/6pv2F6Fj/334541-PA888-X-380.jpg",
+      "email": "ronaldo90@gmail.com",
+      "color": "Purple Fantasy",
+      "description": {
+        "display": "6.74-inch FHD+ AMOLED, 144Hz",
+        "camera": "50MP + 8MP + 2MP",
+        "processor": "Snapdragon 8+ Gen 1",
+        "ram": "16GB",
+        "rom": "512GB"
+      }
+    },
+    {
+      "title": "Moto G Power 2024",
+      "brand": "Motorola",
+      "price": 299.99,
+      "category": "Budget",
+      "rating": 4.0,
+      "img": "https://i.postimg.cc/pX9pnXVW/rb-2147846500.png",
+      "email": "musfiq90@gmail.com",
+      "color": "Ice Blue",
+      "description": {
+        "display": "6.5-inch HD+ LCD, 90Hz",
+        "camera": "50MP + 2MP",
+        "processor": "MediaTek Helio G85",
+        "ram": "6GB",
+        "rom": "128GB"
+      }
+    },
+    {
+      "title": "Poco X5 Pro",
+      "brand": "Poco",
+      "price": 319.99,
+      "category": "Budget",
+      "rating": 4.1,
+      "img": "https://i.postimg.cc/VL359Q5j/rb-2147846501.png",
+      "email": "ronaldo90@gmail.com",
+      "color": "Horizon Blue",
+      "description": {
+        "display": "6.67-inch FHD+ AMOLED, 120Hz",
+        "camera": "108MP + 8MP + 2MP",
+        "processor": "Snapdragon 778G",
+        "ram": "8GB",
+        "rom": "128GB"
+      }
+    },
+    {
+      "title": "Nokia G22",
+      "brand": "Nokia",
+      "price": 199.99,
+      "category": "Budget",
+      "rating": 3.8,
+      "img": "https://i.postimg.cc/fyPyg1CQ/rb-2147849864.png",
+      "email": "ronaldo90@gmail.com",
+      "color": "Lagoon Blue",
+      "description": {
+        "display": "6.52-inch HD+ IPS LCD",
+        "camera": "50MP + 2MP + 2MP",
+        "processor": "Unisoc T606",
+        "ram": "4GB",
+        "rom": "64GB"
+      }
+    },
+    {
+      "title": "Infinix Zero Ultra",
+      "brand": "Infinix",
+      "price": 279.99,
+      "category": "Budget",
+      "rating": 4.1,
+      "img": "https://i.postimg.cc/jq3D5Jb3/rb-2147852786.png",
+      "email": "ronaldo90@gmail.com",
+      "color": "Cosmic White",
+      "description": {
+        "display": "6.8-inch FHD+ AMOLED, 120Hz",
+        "camera": "200MP + 13MP + 2MP",
+        "processor": "MediaTek Dimensity 920",
+        "ram": "8GB",
+        "rom": "256GB"
+      }
+    }
+  ]
+  

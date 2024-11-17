@@ -21,7 +21,6 @@ const Navber = () => {
                 navigate('/')
             })
     }
-console.log('user',user);
 
 
     const items = <>
