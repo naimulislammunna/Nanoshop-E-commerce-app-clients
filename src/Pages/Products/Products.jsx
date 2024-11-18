@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import Product from "./Product";
+import ProductCard from "./ProductCard";
 import { useState } from "react";
 import Loader from "../../Components/Loader";
 import SearchBar from "./SearchBar";
@@ -18,14 +18,19 @@ const Products = () => {
     const { data: products = [], isLoading } = useQuery({
         queryKey: ['produtct', search, sort, brand, category],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/products?search=${search}&sort=${sort}&brand=${brand}&category=${category}`)
+            const res = await axiosPublic.get(`/all-products?search=${search}&sort=${sort}&brand=${brand}&category=${category}`)
             return res.data;
         }
     })
-    console.log(search, sort, brand, category);
 
-
-    if (isLoading) return <Loader />
+    const handleReset=()=>{
+        setBrand('')
+        setSearch('')
+        setCategory('')
+        setSort('')
+        window.location.reload()
+    }
+    // console.log(search, sort, brand, category);
 
     return (
         <div className="container">
@@ -35,11 +40,14 @@ const Products = () => {
             </div>
             <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-3">
-                    <FilterBar setBrandValue={(e) => setBrand(e)} setCategoryValue={(e) => setCategory(e)} />
+                    <FilterBar setBrandValue={(e) => setBrand(e)} setCategoryValue={(e) => setCategory(e)} products={products}/>
+                    <div>
+                    <button onClick={handleReset} className="btn btn-primary w-full mx-auto my-4">Reset</button>
+                    </div>
                 </div>
                 <div className="grid grid-cols-4 gap-5 col-span-9">
                     {
-                        products.map(product => <Product key={product._id} item={product}></Product>)
+                        isLoading ? <Loader/> : products.result.map(product => <ProductCard key={product._id} item={product}></ProductCard>)
                     }
                 </div>
             </div>

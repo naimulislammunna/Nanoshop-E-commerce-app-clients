@@ -1,5 +1,5 @@
 
-const Product = ({item}) => {
+const ProductCard = ({item}) => {
     return (
         <div className="w-full max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
             <div className="relative flex h-48 w-full justify-center lg:h-[150px]">
@@ -25,4 +25,4 @@ const Product = ({item}) => {
     );
 };
 
-export default Product;
+export default ProductCard;
