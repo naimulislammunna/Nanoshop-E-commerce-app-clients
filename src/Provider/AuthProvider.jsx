@@ -2,12 +2,14 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.init";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosPublic = useAxiosPublic();
 
     const handleRegisterUser = (email, password) => {
         setLoading(true)
@@ -34,16 +36,21 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
+                const res = await axiosPublic.post('/jwt', { email: currentUser.email })
+                localStorage.setItem('access-token', res?.data?.token)
                 setLoading(false);
+            }
+            else {
+                localStorage.removeItem('access-token');
+                setLoading(false)
             }
         })
         return () => {
             unsubscribe()
         };
-        // unsubscribe();
     }, [])
 
 

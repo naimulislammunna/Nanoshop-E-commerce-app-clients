@@ -9,7 +9,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Navber = () => {
-    const user = useAuth();
+    const {user} = useAuth();
     // const { data } = useAdmin();
     
     const navigate = useNavigate();
@@ -90,6 +90,7 @@ const Navber = () => {
                                 data?.role === 'Admin' ? <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/admin-dashboard'><button>Admin-dashboard</button></Link></li> : <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/user-dashboard'> My Dashboard </Link></li>
 
                             } */}
+                            <li><Link to='/seller-dashboard'>Seller Dashboard</Link></li>
                             <li>{user && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
                         </ul>
                     </div>}

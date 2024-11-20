@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const Register = () => {
-    const {handleRegisterUser, updateUserProfile} = useContext(AuthContext);
+    const { handleRegisterUser, updateUserProfile } = useContext(AuthContext);
     const imgKey = import.meta.env.VITE_imgBB_key;
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Register = () => {
     const {
         register,
         handleSubmit,
+        formState: { errors }
     } = useForm();
 
     const onSubmit = async (data) => {
@@ -47,6 +48,9 @@ const Register = () => {
                 .catch(err => toast.error(err.message.split('/')[1])
                 )
         }
+        else{
+            toast.error('Password does not match with Confirm Password')
+        }
 
     }
     return (
@@ -67,9 +71,9 @@ const Register = () => {
                             placeholder="Enter username"
                             name="name"
                             type="text"
-                            required
-                            {...register("name")}
+                            {...register("name", { required: true })}
                         />
+                        {errors.name && <p className="text-red-700">This field is required</p>}
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="photoUrl" className="block font-medium">
@@ -81,9 +85,9 @@ const Register = () => {
                             placeholder="Enter Url"
                             name="photo"
                             type="file"
-                            required
-                            {...register("photo")}
+                            {...register("photo", { required: true })}
                         />
+                        {errors.photo && <p className="text-red-700">This field is required</p>}
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="email" className="block font-medium">
@@ -95,9 +99,10 @@ const Register = () => {
                             placeholder="Enter username"
                             name="email"
                             type="email"
-                            required
-                            {...register("email")}
+                            {...register("email", { required: "Email is required", maxLength: { value: 20, message: 'max length 20' } })}
+                            aria-invalid={errors.email ? "true" : "false"}
                         />
+                        {errors.email && <p role="alert" className="text-red-700">{errors.email.message}</p>}
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="email" className="block font-medium">
@@ -109,9 +114,9 @@ const Register = () => {
                             id=""
                             {...register("role")}
                         >
-                            <option value="seller">Seller</option>
                             <option value="buyer">Buyer</option>
-                            
+                            <option value="seller">Seller</option>
+
                         </select>
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
@@ -124,9 +129,15 @@ const Register = () => {
                             placeholder="Enter password"
                             name="password"
                             type="password"
-                            required
-                            {...register("password")}
+                            {...register("password", {
+                                required: "Password is require", pattern: {
+                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!#\$%\^&\*])[A-Za-z\d@!#\$%\^&\*]{8,}$/,
+                                    message: "At least 8 characters &  uppercase & lowercase & one number & one special character"
+                            }
+                            })}
+                            aria-invalid={errors.password ? "true" : "false"}
                         />
+                        {errors.password && <p role="alert" className="text-red-700">{errors.password.message}</p>}
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="password_2" className="block font-medium">
@@ -138,7 +149,6 @@ const Register = () => {
                             placeholder="Enter password"
                             name="confirm-password"
                             type="password"
-                            required
                             {...register("confirmPassword")}
                         />
                     </div>
