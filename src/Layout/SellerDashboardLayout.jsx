@@ -3,11 +3,11 @@ import SideBar from "../Pages/SellerDashboard/SideBar";
 
 const SellerDashboardLayout = () => {
     return (
-        <div className="flex grid-cols-12 gap-5 h-screen container py-10">
-            <div className="col-span-4 bg-gray-400">
+        <div className="flex grid-cols-12 gap-5 min-h-screen h-full">
+            <div className="col-span-4 bg-gray-200">
                 <SideBar/>
             </div>
-            <div className="col-span-8">
+            <div className="flex-1">
                 <Outlet/>
             </div>
         </div>

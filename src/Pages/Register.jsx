@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import axios from "axios";
+import GoogleSignIn from "../Components/GoogleSignIn";
 
 const Register = () => {
     const { handleRegisterUser, updateUserProfile } = useContext(AuthContext);
@@ -169,8 +170,7 @@ const Register = () => {
                     <div className="mx-4 text-gray-400">OR</div>
                     <hr className="flex-1 border-gray-400" />
                 </div>
-                {/* Social icons */}
-                {/* <GoogleLogIn></GoogleLogIn> */}
+                <GoogleSignIn/>
             </div>
         </div>
     );

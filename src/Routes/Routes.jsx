@@ -9,42 +9,54 @@ import Overview from "../Pages/SellerDashboard/Overview";
 import AddProducts from "../Pages/SellerDashboard/AddProducts";
 import PrivateRoutes from "./PrivateRoutes";
 import SellerRoutes from "./SellerRoutes";
-
+import ProductDetails from "../Pages/Products/ProductDetails";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import MyProducts from "../Pages/SellerDashboard/MyProducts";
+const axiosPublic = useAxiosPublic();
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home/>,
-        children:[
-            {
-                index: true,
-                element: <Banner/>
-            },
-            {
-                path: '/register',
-                element: <Register/>
-            },
-            {
-                path: '/sign-in',
-                element: <SignIn/>
-            },
-            {
-                path: '/products',
-                element: <PrivateRoutes><Products/></PrivateRoutes>
-            },
-        ]
-    },
-    {
-        path:'/seller-dashboard',
-        element: <SellerRoutes><SellerDashboardLayout/></SellerRoutes>,
+        element: <Home />,
         children: [
             {
                 index: true,
-                element: <Overview/>
+                element: <Banner />
             },
             {
-                path:'add-products',
-                element: <AddProducts/>
+                path: '/register',
+                element: <Register />
+            },
+            {
+                path: '/sign-in',
+                element: <SignIn />
+            },
+            {
+                path: '/products',
+                element: <Products />
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetails />,
+                loader: ({ params }) => fetch(`http://localhost:4000/all-products/${params.id}`)
             }
+        ]
+    },
+    {
+        path: '/seller-dashboard',
+        element: <SellerRoutes><SellerDashboardLayout /></SellerRoutes>,
+        children: [
+            {
+                index: true,
+                element: <Overview />
+            },
+            {
+                path: 'add-products',
+                element: <AddProducts />
+            },
+            {
+                path: 'my-products',
+                element: <MyProducts/>
+            },
         ]
     }
 ])

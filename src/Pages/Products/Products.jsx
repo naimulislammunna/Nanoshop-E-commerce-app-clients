@@ -45,7 +45,7 @@ const Products = () => {
                     <button onClick={handleReset} className="btn btn-primary w-full mx-auto my-4">Reset</button>
                     </div>
                 </div>
-                <div className="grid grid-cols-4 gap-5 col-span-9">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 col-span-9">
                     {
                         isLoading ? <Loader/> : products.result.map(product => <ProductCard key={product._id} item={product}></ProductCard>)
                     }
