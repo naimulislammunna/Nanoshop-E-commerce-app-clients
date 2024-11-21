@@ -91,6 +91,7 @@ const Navber = () => {
 
                             } */}
                             <li><Link to='/seller-dashboard'>Seller Dashboard</Link></li>
+                            <li><Link to='/admin-dashboard'>Admin Dashboard</Link></li>
                             <li>{user && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
                         </ul>
                     </div>}

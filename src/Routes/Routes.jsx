@@ -12,6 +12,9 @@ import SellerRoutes from "./SellerRoutes";
 import ProductDetails from "../Pages/Products/ProductDetails";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import MyProducts from "../Pages/SellerDashboard/MyProducts";
+import AdminRoutes from "./AdminRoutes";
+import AdminDashboardLayout from "../Layout/AdminDashboardLayout";
+import ManageUsers from "../Pages/AdminDashboard/ManageUsers";
 const axiosPublic = useAxiosPublic();
 const router = createBrowserRouter([
     {
@@ -57,6 +60,16 @@ const router = createBrowserRouter([
                 path: 'my-products',
                 element: <MyProducts/>
             },
+        ]
+    },
+    {
+        path:'/admin-dashboard',
+        element: <AdminRoutes><AdminDashboardLayout/></AdminRoutes>,
+        children: [
+            {
+                index: true,
+                element: <ManageUsers/>
+            }
         ]
     }
 ])
