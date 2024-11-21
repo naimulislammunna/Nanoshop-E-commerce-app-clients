@@ -1,30 +1,19 @@
 import { useQuery } from "react-query";
-import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UserCard from "./UserCard";
 import Loader from "../../Components/Loader";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
-    // const {user} = useAuth();
 
-    const {data, isLoading, refetch} = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: [],
-        queryFn: async ()=>{
+        queryFn: async () => {
             const res = await axiosSecure.get(`/users`);
             return res.data;
         }
     })
-console.log("user", data);
-
-    // const handleCencel = async (id) => {
-    //     const res = await axiosSecure.delete(`/my-products/${id}`);
-    //     if (res.data?.deletedCount) {
-    //         toast.success("Products Deleted")
-    //         refetch();
-    //     }
-    // }
-    if(isLoading) return <Loader/>
+    if (isLoading) return <Loader />
     return (
         <>
             <section className="container px-4 mx-auto py-10">
@@ -70,10 +59,6 @@ console.log("user", data);
                                                 </button>
                                             </th>
 
-                                            {/* <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">See Info</th>
-
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">User Details</th> */}
-
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Action</th>
 
 
@@ -81,10 +66,10 @@ console.log("user", data);
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
-                                            data?.map(user => <UserCard key={user._id} 
-                                                user={user} 
-                                                // refetch={refetch}
-                                                ></UserCard>)
+                                            data?.map(user => <UserCard key={user._id}
+                                                user={user}
+                                                refetch={refetch}
+                                            ></UserCard>)
                                         }
                                     </tbody>
                                 </table>

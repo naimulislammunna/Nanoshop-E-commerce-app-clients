@@ -54,7 +54,7 @@ const UserCard = ({user, refetch}) => {
                     </div>
                 </td>
                 <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                    <div className="cursor-pointer">
+                    <div>
                         {
                             user?.role === 'admin' ? <>
                                 <p className="flex justify-center text-xl text-emerald-600"><MdAdminPanelSettings /></p>
@@ -63,8 +63,8 @@ const UserCard = ({user, refetch}) => {
                                 : <>
                                     {
                                         user?.role === 'seller' ? <><p className="flex justify-center"><FaUser /> </p>
-                                        <p className="text-center"><span>Seller</span></p></> : <><p className="flex justify-center text-lg"><IoPeople /></p>
-                                        <p  onClick={() => handleRole(user._id)} className="text-center"><span>Make Seller</span></p></>
+                                        <p className="text-center"><span className="text-orange-600">Seller</span></p></> : <><p className="flex justify-center text-lg"><IoPeople /></p>
+                                        <p  onClick={() => handleRole(user._id)} className="text-center cursor-pointer p-2"><span>Make Seller</span></p></>
                                     }
                                 </>
                         }

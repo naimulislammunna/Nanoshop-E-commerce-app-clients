@@ -3,6 +3,8 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
+import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyProducts = () => {
     const axiosSecure = useAxiosSecure();
@@ -44,6 +46,9 @@ const MyProducts = () => {
                                 <td className="py-4 px-6 border-b text-lg font-medium">$ {product?.price}</td>
                                 <td className="py-4 px-6 border-b text-lg font-medium">{product?.brand}</td>
                                 <td className="py-4 px-6 border-b text-lg font-medium flex justify-center items-center">
+                                    <div className="inline-flex items-center px-3 py-3 rounded-full gap-x-2 bg-green-100/60 dark:bg-gray-800 mx-2">
+                                    <Link to={`update-products/${product._id}`}><button className="text-green-700 text-2xl"><FaEdit /></button></Link>
+                                    </div>
                                     <div className="inline-flex items-center px-3 py-3 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
                                     <button onClick={() => handleCencel(product._id)} className="text-red-500 text-2xl"><MdDelete /></button>
                                     </div>

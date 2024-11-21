@@ -15,6 +15,7 @@ import MyProducts from "../Pages/SellerDashboard/MyProducts";
 import AdminRoutes from "./AdminRoutes";
 import AdminDashboardLayout from "../Layout/AdminDashboardLayout";
 import ManageUsers from "../Pages/AdminDashboard/ManageUsers";
+import UpdateProducts from "../Pages/SellerDashboard/UpdateProducts";
 const axiosPublic = useAxiosPublic();
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-products',
                 element: <MyProducts/>
+            },
+            {
+                path: 'my-products/update-products/:id',
+                element: <UpdateProducts/>
             },
         ]
     },
