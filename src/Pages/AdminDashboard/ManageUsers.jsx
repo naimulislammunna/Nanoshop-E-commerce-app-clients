@@ -1,7 +1,30 @@
+import { useQuery } from "react-query";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UserCard from "./UserCard";
+import Loader from "../../Components/Loader";
 
 const ManageUsers = () => {
-    const data = []
+    const axiosSecure = useAxiosSecure();
+    // const {user} = useAuth();
+
+    const {data, isLoading, refetch} = useQuery({
+        queryKey: [],
+        queryFn: async ()=>{
+            const res = await axiosSecure.get(`/users`);
+            return res.data;
+        }
+    })
+console.log("user", data);
+
+    // const handleCencel = async (id) => {
+    //     const res = await axiosSecure.delete(`/my-products/${id}`);
+    //     if (res.data?.deletedCount) {
+    //         toast.success("Products Deleted")
+    //         refetch();
+    //     }
+    // }
+    if(isLoading) return <Loader/>
     return (
         <>
             <section className="container px-4 mx-auto py-10">
@@ -37,7 +60,7 @@ const ManageUsers = () => {
                                             </th>
 
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <button className="flex items-center gap-x-2">
+                                                <button className="flex items-center mx-auto gap-x-2">
                                                     <span>Role</span>
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4">
