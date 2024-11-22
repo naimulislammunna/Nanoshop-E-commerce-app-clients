@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home";
 import Products from "../Pages/Products/Products";
-import Banner from "../Pages/Home/Banner";
 import Register from "../Pages/Register";
 import SignIn from "../Pages/SignIn";
 import SellerDashboardLayout from "../Layout/sellerDashboardLayout";
@@ -10,21 +9,22 @@ import AddProducts from "../Pages/SellerDashboard/AddProducts";
 import PrivateRoutes from "./PrivateRoutes";
 import SellerRoutes from "./SellerRoutes";
 import ProductDetails from "../Pages/Products/ProductDetails";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import MyProducts from "../Pages/SellerDashboard/MyProducts";
 import AdminRoutes from "./AdminRoutes";
 import AdminDashboardLayout from "../Layout/AdminDashboardLayout";
 import ManageUsers from "../Pages/AdminDashboard/ManageUsers";
 import UpdateProducts from "../Pages/SellerDashboard/UpdateProducts";
-const axiosPublic = useAxiosPublic();
+import HomeLayout from "../Layout/HomeLayout";
+import UserDashboard from "../Layout/UserDashboard";
+import Wishlist from "../Pages/UserDashboard/Wishlist";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
+        element: <HomeLayout/>,
         children: [
             {
                 index: true,
-                element: <Banner />
+                element: <Home/>
             },
             {
                 path: '/register',
@@ -43,6 +43,16 @@ const router = createBrowserRouter([
                 element: <ProductDetails />,
                 loader: ({ params }) => fetch(`http://localhost:4000/all-products/${params.id}`)
             }
+        ]
+    },
+    {
+        path: '/user-dashboard',
+        element: <PrivateRoutes><UserDashboard/></PrivateRoutes>,
+        children: [
+            {
+                index: true,
+                element: <Wishlist/>
+            },
         ]
     },
     {
