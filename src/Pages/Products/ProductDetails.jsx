@@ -2,11 +2,14 @@ import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useUserData from "../../Hooks/useUserData";
 
 const ProductDetails = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+
+    const { userData } = useUserData();
 
     const handleMyCart = async (id) => {
         const doc = {
@@ -22,7 +25,7 @@ const ProductDetails = () => {
 
     return (
         <div className="container my-10">
-            <div className="card card-side bg-base-100 shadow-xl">
+            <div className="card flex-col lg:flex-row card-side bg-base-100 shadow-xl">
                 <figure>
                     <img className="w-96"
                         src={data?.img}
@@ -42,7 +45,11 @@ const ProductDetails = () => {
                     </div>
                     <div className="card-actions justify-end">
                         <p className="text-lg font-semibold text-red-800">$ {data?.price}</p>
-                        <button onClick={()=> handleMyCart(data._id)} className="btn btn-primary">Add to Cart</button>
+                        {
+                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="btn btn-primary">Add to Cart</button> :
+                            <button className="btn btn-primary cursor-not-allowed">Add to Cart</button>
+                        }
+
                     </div>
                 </div>
             </div>

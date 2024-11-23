@@ -5,12 +5,13 @@ import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Loader from "../../Components/Loader";
 
 const MyProducts = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = useAuth();
 
-    const {data, refetch} = useQuery({
+    const {data =[], isLoading, refetch} = useQuery({
         queryKey: [],
         queryFn: async ()=>{
             const res = await axiosSecure.get(`/my-products?email=${user.email}`)
@@ -25,7 +26,7 @@ const MyProducts = () => {
             refetch();
         }
     }
-    
+    if(isLoading) return <Loader/>
     return (
         <div>
             <div className="overflow-x-auto">

@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useUserData from "../../Hooks/useUserData";
 
 const ProductCard = ({ item }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const {userData}= useUserData();
     const handleWishlist = async (id) => {
         const doc = {
             userEmail: user.email,
@@ -18,20 +20,8 @@ const ProductCard = ({ item }) => {
         }
     }
 
-    const handleMyCart = async (id) => {
-        const doc = {
-            userEmail: user.email,
-            productId: id
-        }
-        const res = await axiosSecure.patch(`/update-cart`, doc);
-
-        if (res.data.modifiedCount) {
-            toast.success("Add to Cart")
-        }
-    }
-
     return (
-        <div className="w-full max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
+        <div className="w-full lg:max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
             <div className="relative flex h-48 w-full justify-center lg:h-[150px]">
                 <img className="rounded-lg bg-black/40 object-cover" src={item.img} alt="card navigate ui" />
             </div>
@@ -42,7 +32,9 @@ const ProductCard = ({ item }) => {
                 <p className="text-sm font-semibold text-red-700">$ {item.price}</p>
             </div>
             <div className="flex items-center justify-between gap-1 text-sm md:text-base">
-                <button onClick={() => handleWishlist(item._id)} className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800">Wishlist</button>
+                {
+                    userData?.role === "buyer" ?  <button onClick={() => handleWishlist(item._id)} className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800">Wishlist</button> : user?.email ?  <button className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800 cursor-not-allowed">Wishlist</button> : <Link to='/sign-in'><button className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800">Wishlist</button> </Link>
+                }
                 <Link to={`/products/${item._id}`}><button className="rounded-lg text-sm bg-sky-900 px-5 py-1 font-semibold text-white duration-300 hover:scale-95 hover:bg-sky-800">Details</button></Link>
             </div>
         </div>

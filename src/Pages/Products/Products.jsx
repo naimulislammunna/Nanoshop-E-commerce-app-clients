@@ -30,24 +30,23 @@ const Products = () => {
         setSort('')
         window.location.reload()
     }
-console.log("product",products);
 
     if(isLoading) return <Loader/>
 
     return (
         <div className="container">
-            <div className="flex justify-between items-center my-10">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-3 my-10">
                 <SearchBar setSearchValue={(e) => setSearch(e)} />
                 <SortBar setSortValue={(e) => setSort(e)} />
             </div>
             <div className="grid grid-cols-12 gap-5">
-                <div className="col-span-3">
+                <div className="col-span-12 lg:col-span-3">
                     <FilterBar setBrandValue={(e) => setBrand(e)} setCategoryValue={(e) => setCategory(e)} products={products}/>
                     <div>
                     <button onClick={handleReset} className="btn btn-primary w-full mx-auto my-4">Reset</button>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 col-span-9">
+                <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 col-span-9 mx-auto">
                     {
                       products?.result.length ? <>{products?.result?.map(product => <ProductCard key={product._id} item={product}></ProductCard>)} </> : <div className="min-h-full min-w-full col-span-10 justify-center items-center"><h1 className="text-xl text-center font-bold">No Products Found</h1></div>
                     }

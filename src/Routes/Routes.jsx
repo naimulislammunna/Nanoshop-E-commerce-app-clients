@@ -18,6 +18,9 @@ import HomeLayout from "../Layout/HomeLayout";
 import UserDashboard from "../Layout/UserDashboard";
 import Wishlist from "../Pages/UserDashboard/Wishlist";
 import MyCart from "../Pages/UserDashboard/MyCart";
+import BuyerRoutes from "./BuyerRoutes";
+import About from "../AboutUs/About";
+import ContactUs from "../Contacts/ContactUs";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -36,19 +39,27 @@ const router = createBrowserRouter([
                 element: <SignIn />
             },
             {
+                path: '/about',
+                element: <About/>
+            },
+            {
+                path: '/contact',
+                element: <ContactUs />
+            },
+            {
                 path: '/products',
                 element: <Products />
             },
             {
                 path: '/products/:id',
-                element: <ProductDetails />,
+                element: <PrivateRoutes><ProductDetails /></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:4000/all-products/${params.id}`)
             }
         ]
     },
     {
         path: '/user-dashboard',
-        element: <PrivateRoutes><UserDashboard/></PrivateRoutes>,
+        element: <PrivateRoutes><BuyerRoutes><UserDashboard/></BuyerRoutes></PrivateRoutes>,
         children: [
             {
                 index: true,
@@ -62,7 +73,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/seller-dashboard',
-        element: <SellerRoutes><SellerDashboardLayout /></SellerRoutes>,
+        element: <PrivateRoutes><SellerRoutes><SellerDashboardLayout /></SellerRoutes></PrivateRoutes>,
         children: [
             {
                 index: true,
@@ -84,7 +95,7 @@ const router = createBrowserRouter([
     },
     {
         path:'/admin-dashboard',
-        element: <AdminRoutes><AdminDashboardLayout/></AdminRoutes>,
+        element: <PrivateRoutes><AdminRoutes><AdminDashboardLayout/></AdminRoutes></PrivateRoutes>,
         children: [
             {
                 index: true,

@@ -6,7 +6,7 @@ import Loader from "../../Components/Loader";
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data, isLoading, refetch } = useQuery({
+    const { data =[], isLoading, refetch } = useQuery({
         queryKey: [],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users`);

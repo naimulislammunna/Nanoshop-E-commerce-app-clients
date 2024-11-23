@@ -7,7 +7,7 @@ const Wishlist = () => {
     const axiosSecure = useAxiosSecure();
     const {userData} = useUserData();
 
-    const {data, isLoading} = useQuery({
+    const {data = [], isLoading} = useQuery({
         queryKey: [userData],
         queryFn: async ()=>{
             const res = await axiosSecure.get(`/my-wishlist/${userData._id}`)
@@ -16,7 +16,7 @@ const Wishlist = () => {
     })
 
     if(isLoading) return <Loader/>
-    
+
     return (
         <div>
             <div className="overflow-x-auto">
