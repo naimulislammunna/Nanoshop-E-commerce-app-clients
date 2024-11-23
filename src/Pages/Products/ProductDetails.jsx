@@ -1,7 +1,24 @@
 import { useLoaderData } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
     const data = useLoaderData();
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+
+    const handleMyCart = async (id) => {
+        const doc = {
+            userEmail: user.email,
+            productId: id
+        }
+        const res = await axiosSecure.patch(`/update-cart`, doc);
+
+        if (res.data.modifiedCount) {
+            toast.success("Add to Cart");
+        }
+    }
 
     return (
         <div className="container my-10">
@@ -25,7 +42,7 @@ const ProductDetails = () => {
                     </div>
                     <div className="card-actions justify-end">
                         <p className="text-lg font-semibold text-red-800">$ {data?.price}</p>
-                        <button className="btn btn-primary">Add to Cart</button>
+                        <button onClick={()=> handleMyCart(data._id)} className="btn btn-primary">Add to Cart</button>
                     </div>
                 </div>
             </div>

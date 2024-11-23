@@ -15,7 +15,7 @@ const Products = () => {
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
 
-    const { data: products = [], isLoading } = useQuery({
+    const { data: products, isLoading } = useQuery({
         queryKey: ['produtct', search, sort, brand, category],
         queryFn: async () => {
             const res = await axiosPublic.get(`/all-products?search=${search}&sort=${sort}&brand=${brand}&category=${category}`)
@@ -30,7 +30,9 @@ const Products = () => {
         setSort('')
         window.location.reload()
     }
-    // console.log(search, sort, brand, category);
+console.log("product",products);
+
+    if(isLoading) return <Loader/>
 
     return (
         <div className="container">
@@ -47,7 +49,7 @@ const Products = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 col-span-9">
                     {
-                        isLoading ? <Loader/> : products.result.map(product => <ProductCard key={product._id} item={product}></ProductCard>)
+                      products?.result.length ? <>{products?.result?.map(product => <ProductCard key={product._id} item={product}></ProductCard>)} </> : <div className="min-h-full min-w-full col-span-10 justify-center items-center"><h1 className="text-xl text-center font-bold">No Products Found</h1></div>
                     }
                 </div>
             </div>

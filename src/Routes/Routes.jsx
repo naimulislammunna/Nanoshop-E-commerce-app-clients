@@ -17,6 +17,7 @@ import UpdateProducts from "../Pages/SellerDashboard/UpdateProducts";
 import HomeLayout from "../Layout/HomeLayout";
 import UserDashboard from "../Layout/UserDashboard";
 import Wishlist from "../Pages/UserDashboard/Wishlist";
+import MyCart from "../Pages/UserDashboard/MyCart";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Wishlist/>
+            },
+            {
+                path: 'my-cart',
+                element: <MyCart/>
             },
         ]
     },

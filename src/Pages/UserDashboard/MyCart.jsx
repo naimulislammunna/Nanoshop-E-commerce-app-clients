@@ -3,24 +3,22 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
 import Loader from "../../Components/Loader";
 
-const Wishlist = () => {
+const MyCart = () => {
     const axiosSecure = useAxiosSecure();
-    const {userData} = useUserData();
+    const { userData } = useUserData();
 
-    const {data, isLoading} = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: [userData],
-        queryFn: async ()=>{
-            const res = await axiosSecure.get(`/my-wishlist/${userData._id}`)
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/my-cart/${userData._id}`)
             return res.data;
         }
     })
-
-    if(isLoading) return <Loader/>
-    
+    if (isLoading) return <Loader />
     return (
         <div>
             <div className="overflow-x-auto">
-                <h1 className="text-center text-xl font-semibold mt-5">My Wishlist</h1>
+                <h1 className="text-center text-xl font-semibold mt-5">My Cart</h1>
                 <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 my-6">
                     <thead className="bg-sky-900">
                         <tr className="bg-myBlue text-white">
@@ -37,7 +35,7 @@ const Wishlist = () => {
                                 <td className="py-4 px-6 border-b text-xl font-medium">{product?.title}</td>
                                 <td className="py-4 px-6 border-b text-lg font-medium">$ {product?.price}</td>
                                 <td className="py-4 px-6 border-b text-lg font-medium">{product?.brand}</td>
-                                
+
                             </tr>)
                         }
                     </tbody>
@@ -47,4 +45,4 @@ const Wishlist = () => {
     );
 };
 
-export default Wishlist;
+export default MyCart;
