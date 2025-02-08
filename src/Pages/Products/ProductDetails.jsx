@@ -3,11 +3,16 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useUserData from "../../Hooks/useUserData";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { useState } from "react";
 
 const ProductDetails = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const [quantity, setQuantity ]= useState(1);
+    const pricePerProduct = data?.price;
+    const [price, setPrice ]= useState(pricePerProduct);
 
     const { userData } = useUserData();
 
@@ -20,6 +25,20 @@ const ProductDetails = () => {
 
         if (res.data.modifiedCount) {
             toast.success("Add to Cart");
+        }
+    }
+
+    const handlePlus = () =>{
+        if(quantity < 10){
+            setQuantity((prevQuantity)=> prevQuantity + 1)
+            setPrice((amount) => amount + pricePerProduct)
+        }
+    }
+
+    const handleMinus = () =>{
+        if(quantity > 1){
+            setQuantity((prevQuantity)=> prevQuantity - 1)
+            setPrice((amount) => amount - pricePerProduct)
         }
     }
 
@@ -42,9 +61,14 @@ const ProductDetails = () => {
                             <li>processor: {data.description?.processor}</li>
                             <li>ram: {data.description?.ram} <span>Rom: {data.description?.rom}</span></li>
                         </ul>
+                        <div className="w-36 px-5 py-2 my-5 flex border border-red-800 rounded-full">
+                            <button onClick={handleMinus} className="hover:text-red-800"><FaMinus/> </button>
+                            <p className="font-bold px-7">{quantity}</p>
+                            <button onClick={handlePlus} className="hover:text-red-800"><FaPlus/> </button>
+                        </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <p className="text-lg font-semibold text-red-800">$ {data?.price}</p>
+                        <p className="text-lg font-semibold text-red-800">$ {price}</p>
                         {
                             userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="btn btn-primary">Add to Cart</button> :
                             <button className="btn btn-primary cursor-not-allowed">Add to Cart</button>
