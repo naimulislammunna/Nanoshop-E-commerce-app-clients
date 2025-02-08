@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <PrivateRoutes><ProductDetails /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:4000/all-products/${params.id}`)
+                loader: ({ params }) => fetch(`https://nano-shop-server.vercel.app/all-products/${params.id}`)
             }
         ]
     },
