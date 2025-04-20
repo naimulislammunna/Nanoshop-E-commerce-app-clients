@@ -11,7 +11,7 @@ const ProductDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const [quantity, setQuantity ]= useState(1);
-    const pricePerProduct = data?.price;
+    const pricePerProduct = parseInt(data?.price);
     const [price, setPrice ]= useState(pricePerProduct);
 
     const { userData } = useUserData();
