@@ -3,6 +3,7 @@ import Contact from "./Contact";
 import FAQ from "./FAQ";
 import FeatureCategory from "./FeatureCategory";
 import FeatureProducts from "./FeatureProducts";
+import NewArrival from "./NewArrival";
 import Testimonials from "./Testimonials";
 
 
@@ -12,6 +13,7 @@ const Home = () => {
             <Banner/>
             <FeatureProducts/>
             <FeatureCategory/>
+            <NewArrival/>
             <Testimonials/>
             <FAQ/>
             <Contact/>
