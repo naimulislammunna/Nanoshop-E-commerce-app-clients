@@ -61,6 +61,12 @@ const ProductDetails = () => {
                             <li>processor: {data.description?.processor}</li>
                             <li>ram: {data.description?.ram} <span>Rom: {data.description?.rom}</span></li>
                         </ul>
+                        <div className="flex gap-4 my-3">
+                            <span className="">Choose Colour :</span> 
+                            <div className="w-7 h-7 rounded-md bg-[#800020] border-2 border-white outline outline-offset-2 outline-gray-500"></div>
+                            <div className="w-7 h-7 rounded-md bg-[#A020F0] border-2 border-white outline outline-offset-2 outline-gray-500"></div>
+                            <div className="w-7 h-7 rounded-md bg-black border-2 border-white outline outline-offset-2 outline-gray-500"></div>
+                        </div>
                         <div className="w-36 px-5 py-2 my-5 flex border border-red-800 rounded-full">
                             <button onClick={handleMinus} className="hover:text-red-800"><FaMinus/> </button>
                             <p className="font-bold px-7">{quantity}</p>
