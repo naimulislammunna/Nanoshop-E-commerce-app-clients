@@ -52,15 +52,11 @@ const ProductDetails = () => {
     return (
         <div className="container my-10">
             <div className="card flex-col lg:flex-row card-side bg-base-100 shadow-xl">
-                <figure className="flex-col">
-                    <div className="w-full h-60 sm:h-96 md:h-[540px] flex flex-col items-center justify-center gap-5 lg:gap-10 bg-cover bg-center before:absolute before:bg-black/50 before:inset-0 transform ease-linear"
-                        style={{ backgroundImage: `url(${sliders[currentSlider].img})` }}>
-                        {/* text container here */}
-                        <div className="drop-shadow-lg text-white text-center px-5">
-                            <h1 className="text-xl lg:text-3xl font-semibold mb-3">{sliders[currentSlider].title}</h1>
-                            <p className="text-sm md:text-base lg:text-lg">{sliders[currentSlider].des}</p>
-                        </div>
+                <figure className="flex-col w-1/2">
+                    <div className="w-2/3">
+                        <img src={`${sliders[currentSlider].img}`} alt="" />
                     </div>
+
                     {/* slider container */}
                     <div className="h-24 flex justify-center items-center gap-3 p-2">
                         {/* sliders */}
@@ -71,8 +67,8 @@ const ProductDetails = () => {
                         ))}
                     </div>
                 </figure>
-                <div className="card-body">
-                    <h2 className="card-title">{data?.title}</h2>
+                <div className="card-body bg-gray-100">
+                    <h2 className="text-3xl font-semibold">{data?.title}</h2>
                     <p>Brand: {data?.brand}</p>
                     <p>Category: {data?.category}</p>
                     <div>
@@ -80,8 +76,13 @@ const ProductDetails = () => {
                             <li>Display: {data.description?.display}</li>
                             <li>camera: {data.description?.camera}</li>
                             <li>processor: {data.description?.processor}</li>
-                            <li>ram: {data.description?.ram} <span>Rom: {data.description?.rom}</span></li>
                         </ul>
+                        <div className="my-5">
+                            <p className="font-bold">Ram</p>
+                            <button className="px-5 py-1 my-2 rounded-md border border-gray-400">{data.description?.ram}</button>
+                            <p className="font-bold">Storage</p>
+                            <button className="px-5 py-1 my-2 rounded-md border border-gray-400">{data.description?.rom}</button>
+                        </div>
                         <div className="flex gap-4 my-3">
                             <span className="">Choose Colour :</span>
                             {
