@@ -13,8 +13,11 @@ const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const pricePerProduct = parseInt(data?.price);
     const [price, setPrice] = useState(pricePerProduct);
+    const [active, setActive] = useState(0);
 
     const colours = ["#800020","#A020F0","#87CEEB","black"]
+    const rams = [8, 16, 32];
+    const roms = [128, 256, 512]
 
     const { userData } = useUserData();
 
@@ -79,9 +82,17 @@ const ProductDetails = () => {
                         </ul>
                         <div className="my-5">
                             <p className="font-bold">Ram</p>
-                            <button className="px-5 py-1 my-2 rounded-md border border-gray-400">{data.description?.ram}</button>
+                            <div className="flex gap-2">
+                            {
+                                rams.map((ram, idx)=> <button onClick={()=> setActive(idx)} key={idx} className={`px-5 py-1 my-2 rounded-md border ${active === idx ? 'border-2 border-green-700 text-green-600' : 'border-gray-400'}`}>{ram} GB</button>)
+                            }
+                            </div>
                             <p className="font-bold">Storage</p>
-                            <button className="px-5 py-1 my-2 rounded-md border border-gray-400">{data.description?.rom}</button>
+                            <div className="flex gap-2">
+                            {
+                                roms.map((rom, idx)=> <button onClick={()=> setActive(idx)} key={idx} className={`px-5 py-1 my-2 rounded-md border ${active === idx ? 'border-2 border-green-700 text-green-600' : 'border-gray-400'}`}>{rom} GB</button>)
+                            }
+                            </div>
                         </div>
                         <div className="flex gap-4 my-3">
                             <span className="">Choose Colour :</span>
