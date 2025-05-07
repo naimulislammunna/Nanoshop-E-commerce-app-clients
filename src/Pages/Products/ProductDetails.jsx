@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -110,6 +110,9 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
+                    <Link to={'/buynow'}>
+                    <button className="px-4 py-2 rounded-full bg-myColor text-white ">Buy Now</button>
+                    </Link>
                         {
                             userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="px-4 py-2 rounded-full bg-myColor text-white">Add to Cart</button> :
                                 <button className="px-4 py-2 rounded-full bg-myColor text-white ">Add to Cart</button>
