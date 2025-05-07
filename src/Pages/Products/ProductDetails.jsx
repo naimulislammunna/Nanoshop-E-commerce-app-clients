@@ -12,10 +12,12 @@ const ProductDetails = () => {
     const { user } = useAuth();
     const [quantity, setQuantity] = useState(1);
     const pricePerProduct = parseInt(data?.price);
-    const [price, setPrice] = useState(pricePerProduct);
-    const [active, setActive] = useState(0);
+    // const [price, setPrice] = useState(pricePerProduct);
+    const [activeRam, setActiveRam] = useState(0);
+    const [activeRom, setActiveRom] = useState(0);
+    const [activeColor, setActiveColor] = useState(0);
 
-    const colours = ["#800020","#A020F0","#87CEEB","black"]
+    const colours = ["#800020", "#A020F0", "#87CEEB", "black"]
     const rams = [8, 16, 32];
     const roms = [128, 256, 512]
 
@@ -34,29 +36,29 @@ const ProductDetails = () => {
     }
 
     const handlePlus = () => {
-        if (quantity < 10) {
+        if (quantity < 5) {
             setQuantity((prevQuantity) => prevQuantity + 1)
-            setPrice((amount) => amount + pricePerProduct)
+            // setPrice((amount) => amount + pricePerProduct)
         }
     }
 
     const handleMinus = () => {
         if (quantity > 1) {
             setQuantity((prevQuantity) => prevQuantity - 1)
-            setPrice((amount) => amount - pricePerProduct)
+            // setPrice((amount) => amount - pricePerProduct)
         }
     }
-    
-    
+
+
     // image slider 
     const [currentSlider, setCurrentSlider] = useState(0);
-    const sliders = [{ img: "https://i.postimg.cc/dtCLt67j/Galaxy-S22-Ultra-Burgundy-6141.jpg" }, { img: "https://i.postimg.cc/wxZ1pZBB/Galaxy-S22-Ultra-Bora-Purple-4999.jpg"}, { img: "https://i.postimg.cc/cLN6K3wy/Galaxy-S22-Ultra-Sky-Blue-5511.jpg"}, { img: "https://i.postimg.cc/C535sB28/Galaxy-S22-Phantom-Black-1075.jpg"}];
+    const sliders = [{ img: "https://i.postimg.cc/dtCLt67j/Galaxy-S22-Ultra-Burgundy-6141.jpg" }, { img: "https://i.postimg.cc/wxZ1pZBB/Galaxy-S22-Ultra-Bora-Purple-4999.jpg" }, { img: "https://i.postimg.cc/cLN6K3wy/Galaxy-S22-Ultra-Sky-Blue-5511.jpg" }, { img: "https://i.postimg.cc/C535sB28/Galaxy-S22-Phantom-Black-1075.jpg" }];
 
     return (
         <div className="container my-10">
             <div className="card flex-col lg:flex-row card-side bg-base-100 shadow-xl">
                 <figure className="flex-col w-1/2">
-                    <div className="w-2/3">
+                    <div className="h-3/4 w-3/4">
                         <img src={`${sliders[currentSlider].img}`} alt="" />
                     </div>
 
@@ -72,34 +74,34 @@ const ProductDetails = () => {
                 </figure>
                 <div className="card-body bg-gray-100">
                     <h2 className="text-3xl font-semibold">{data?.title}</h2>
-                    <p>Brand: {data?.brand}</p>
-                    <p>Category: {data?.category}</p>
+                    <ul>
+                        <li>Brand: {data?.brand}</li>
+                        <li>Category: {data?.category}</li>
+                        <li>Display: {data.description?.display}</li>
+                        <li>Camera: {data.description?.camera}</li>
+                        <li>Processor: {data.description?.processor}</li>
+                    </ul>
                     <div>
-                        <ul>
-                            <li>Display: {data.description?.display}</li>
-                            <li>camera: {data.description?.camera}</li>
-                            <li>processor: {data.description?.processor}</li>
-                        </ul>
-                        <div className="my-5">
+                        <div className="my-2">
                             <p className="font-bold">Ram</p>
                             <div className="flex gap-2">
-                            {
-                                rams.map((ram, idx)=> <button onClick={()=> setActive(idx)} key={idx} className={`px-5 py-1 my-2 rounded-md border ${active === idx ? 'border-2 border-green-700 text-green-600' : 'border-gray-400'}`}>{ram} GB</button>)
-                            }
+                                {
+                                    rams.map((ram, idx) => <button onClick={() => setActiveRam(idx)} key={idx} className={`px-5 py-1 my-2 text-sm rounded-md border ${activeRam === idx ? 'border-2 border-myColor text-myColor' : 'border-myColor'}`}>{ram} GB</button>)
+                                }
                             </div>
                             <p className="font-bold">Storage</p>
                             <div className="flex gap-2">
-                            {
-                                roms.map((rom, idx)=> <button onClick={()=> setActive(idx)} key={idx} className={`px-5 py-1 my-2 rounded-md border ${active === idx ? 'border-2 border-green-700 text-green-600' : 'border-gray-400'}`}>{rom} GB</button>)
-                            }
+                                {
+                                    roms.map((rom, idx) => <button onClick={() => setActiveRom(idx)} key={idx} className={`px-5 py-1 my-2 text-sm rounded-md border ${activeRom === idx ? 'border-2 border-myColor text-myColor' : 'border-myColor'}`}>{rom} GB</button>)
+                                }
                             </div>
                         </div>
                         <div className="flex gap-4 my-3">
                             <span className="">Choose Colour :</span>
                             {
-                                colours.map((colour, idx) => <div onClick={() => setCurrentSlider(idx)} key={idx} className={`w-7 h-7 rounded-md bg-[${colour}]  border-2 border-white outline outline-offset-2 outline-gray-500 cursor-pointer`}></div>)
+                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-md  border-2 border-white outline  outline-gray-500 cursor-pointer ${activeColor === idx && 'border-4 border-myColor'}`}></div>)
                             }
-                            
+
                         </div>
                         <div className="w-36 px-5 py-2 my-5 flex border border-red-800 rounded-full">
                             <button onClick={handleMinus} className="hover:text-red-800"><FaMinus /> </button>
@@ -108,10 +110,9 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <p className="text-lg font-semibold text-red-800">$ {price}</p>
                         {
-                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="btn btn-primary">Add to Cart</button> :
-                                <button className="btn btn-primary cursor-not-allowed">Add to Cart</button>
+                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="px-4 py-2 rounded-full bg-myColor text-white">Add to Cart</button> :
+                                <button className="px-4 py-2 rounded-full bg-myColor text-white ">Add to Cart</button>
                         }
 
                     </div>
