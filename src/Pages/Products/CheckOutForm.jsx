@@ -2,13 +2,7 @@
 const CheckOutForm = () => {
     return (
         <div>
-            <div className="mx-auto flex w-72 items-center justify-center">
-                
-
-                <div className={`fixed inset-0 z-[100] transition-opacity duration-300  bg-black/60 backdrop-blur-sm`}>
-                    <div className="absolute inset-0" />
-                    <div className={`relative mx-auto max-w-4xl transform transition-all duration-300 md:my-8 `}>
-                        <div className="h-screen overflow-y-auto bg-white shadow-2xl md:max-h-[90vh] md:rounded-2xl dark:bg-gray-800">
+            <div className="h-screen overflow-y-auto bg-white shadow-2xl md:max-h-[90vh] md:rounded-2xl dark:bg-gray-800">
                             <div className="p-6 sm:p-8">
                                 <div className="flex justify-end">
                                 </div>
@@ -139,9 +133,6 @@ const CheckOutForm = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };
