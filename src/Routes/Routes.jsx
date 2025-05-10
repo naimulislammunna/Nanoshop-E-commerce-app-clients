@@ -22,6 +22,7 @@ import BuyerRoutes from "./BuyerRoutes";
 import About from "../AboutUs/About";
 import ContactUs from "../Contacts/ContactUs";
 import CheckOutForm from "../Pages/Products/CheckOutForm";
+import ShopingCart from "../Pages/UserDashboard/ShopingCart";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: '/buynow',
                 element: <CheckOutForm/>
+            },
+            {
+                path: '/cart',
+                element: <ShopingCart/>
             },
             {
                 path: '/products/:id',

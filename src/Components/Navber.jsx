@@ -1,19 +1,21 @@
 // import { useContext } from "react";
-import { Link, NavLink, useNavigate} from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../Auth/AuthProvider";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
+
 // import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navber = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     // const { data } = useAdmin();
-    
+
     const navigate = useNavigate();
-    const { userlogOut} = useContext(AuthContext);
+    const { userlogOut } = useContext(AuthContext);
     const handleLogOut = () => {
         userlogOut()
             .then(() => {
@@ -67,6 +69,12 @@ const Navber = () => {
                     </ul>
                 </div>
                 <div className="flex-none">
+                    <Link to="/cart">
+                        <div className="relative mx-10 w-fit">
+                            <FaCartShopping className="text-4xl" />
+                            <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] text-white">2</span>
+                        </div>
+                    </Link>
                     {
                         user?.displayName || <Link to='/register'>
                             <button className="button">Register</button>
