@@ -2,137 +2,143 @@
 const CheckOutForm = () => {
     return (
         <div>
-            <div className="h-screen overflow-y-auto bg-white shadow-2xl md:max-h-[90vh] md:rounded-2xl dark:bg-gray-800">
-                            <div className="p-6 sm:p-8">
-                                <div className="flex justify-end">
+            <div className="bg-white sm:px-8 px-4 py-6">
+                <div className="max-w-screen-xl max-md:max-w-xl mx-auto">
+                    <div className="flex items-start mb-16">
+                        <div className="w-full">
+                            <div className="flex items-center w-full">
+                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-blue-600 p-1.5 flex items-center justify-center rounded-full">
+                                    <span className="text-sm text-white font-semibold">1</span>
                                 </div>
-
-                                <div className="grid gap-8 px-4 sm:px-6 lg:grid-cols-2">
-                                    <div className="space-y-6">
-                                        <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-900">
-                                            <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Shipping Details</h3>
-                                            <form className="space-y-5">
-                                                {['Name', 'Address', 'City', 'Country'].map((field) => (
-                                                    <div key={field} className="relative">
-                                                        <input
-                                                            type="text"
-                                                            name={field.toLowerCase()}
-                                                            className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 text-gray-900 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-                                                            placeholder={field}
-                                                            id={field.toLowerCase()}
-                                                        />
-                                                        <label
-                                                            htmlFor={field.toLowerCase()}
-                                                            className="absolute -top-2.5 left-4 bg-white px-1 text-sm font-medium text-gray-600 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500 dark:bg-gray-900 dark:text-gray-300"
-                                                        >
-                                                            {field}
-                                                        </label>
-                                                    </div>
-                                                ))}
-                                            </form>
-                                        </div>
-
-                                        <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-900">
-                                            <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Payment Information</h3>
-                                            <form className="space-y-5">
-                                                <div className="relative">
-                                                    <input
-                                                        type="text"
-                                                        name="card-number"
-                                                        className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 text-gray-900 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-                                                        placeholder="Card Number"
-                                                        id="card-number"
-                                                    />
-                                                    <label
-                                                        htmlFor="card-number"
-                                                        className="absolute -top-2.5 left-4 bg-white px-1 text-sm font-medium text-gray-600 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500 dark:bg-gray-900 dark:text-gray-300"
-                                                    >
-                                                        Card Number
-                                                    </label>
-                                                </div>
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="relative">
-                                                        <input
-                                                            type="text"
-                                                            name="expiry"
-                                                            className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 text-gray-900 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-                                                            placeholder="MM/YY"
-                                                            id="expiry"
-                                                        />
-                                                        <label
-                                                            htmlFor="expiry"
-                                                            className="absolute -top-2.5 left-4 bg-white px-1 text-sm font-medium text-gray-600 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500 dark:bg-gray-900 dark:text-gray-300"
-                                                        >
-                                                            Expiry Date
-                                                        </label>
-                                                    </div>
-                                                    <div className="relative">
-                                                        <input
-                                                            type="text"
-                                                            name="cvv"
-                                                            className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 text-gray-900 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-                                                            placeholder="CVV"
-                                                            id="cvv"
-                                                        />
-                                                        <label
-                                                            htmlFor="cvv"
-                                                            className="absolute -top-2.5 left-4 bg-white px-1 text-sm font-medium text-gray-600 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500 dark:bg-gray-900 dark:text-gray-300"
-                                                        >
-                                                            CVV
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div className="relative">
-                                                    <input
-                                                        type="text"
-                                                        name="billing-address"
-                                                        className="peer w-full rounded-lg border border-gray-300 bg-transparent px-4 py-3 text-gray-900 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-                                                        placeholder="Billing Address"
-                                                        id="billing-address"
-                                                    />
-                                                    <label
-                                                        htmlFor="billing-address"
-                                                        className="absolute -top-2.5 left-4 bg-white px-1 text-sm font-medium text-gray-600 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-500 dark:bg-gray-900 dark:text-gray-300"
-                                                    >
-                                                        Billing Address
-                                                    </label>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-6">
-                                        <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-900">
-                                            <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Order Summary</h3>
-                                            <div className="space-y-4">
-                                                {[
-                                                    { name: 'Product 1', price: '$99.99' },
-                                                    { name: 'Product 2', price: '$49.99' },
-                                                    { name: 'Product 3', price: '$29.99' }
-                                                ].map((item, index) => (
-                                                    <div key={index} className="flex justify-between text-gray-700 dark:text-gray-300">
-                                                        <span>{item.name}</span>
-                                                        <span>{item.price}</span>
-                                                    </div>
-                                                ))}
-                                                <div className="border-t border-gray-200 pt-4 dark:border-gray-700">
-                                                    <div className="flex justify-between text-lg font-semibold text-gray-900 dark:text-white">
-                                                        <span>Total</span>
-                                                        <span>$179.97</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button
-                                                
-                                                className="mt-6 w-full rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-medium text-white transition-all hover:from-blue-700 hover:to-indigo-700 focus:outline-none"
-                                            >
-                                                Complete Purchase
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div className="w-full h-[3px] mx-4 rounded-lg bg-blue-600"></div>
+                            </div>
+                            <div className="mt-2 mr-4">
+                                <h6 className="text-sm font-semibold text-slate-900">Cart</h6>
                             </div>
                         </div>
+                        <div className="w-full">
+                            <div className="flex items-center w-full">
+                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-blue-600 p-1.5 flex items-center justify-center rounded-full">
+                                    <span className="text-sm text-white font-semibold">2</span>
+                                </div>
+                                <div className="w-full h-[3px] mx-4 rounded-lg bg-slate-300"></div>
+                            </div>
+                            <div className="mt-2 mr-4">
+                                <h6 className="text-sm font-semibold text-slate-900">Checkout</h6>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-slate-300 p-1.5 flex items-center justify-center rounded-full">
+                                    <span className="text-sm text-white font-semibold">3</span>
+                                </div>
+                            </div>
+                            <div className="mt-2">
+                                <h6 className="text-sm font-semibold text-slate-400">Order</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 lg:gap-x-12">
+                        <div className="lg:col-span-2">
+                            <form>
+                                <div>
+                                    <h2 className="text-xl text-slate-900 font-semibold mb-6">Delivery Details</h2>
+                                    <div className="grid lg:grid-cols-2 gap-y-6 gap-x-4">
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">First Name</label>
+                                            <input type="text" placeholder="Enter First Name"
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Email</label>
+                                            <input type="email" placeholder="Enter Email"
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Phone No.</label>
+                                            <input type="number" placeholder="Enter Phone No."
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Address Line</label>
+                                            <input type="text" placeholder="Enter Address Line"
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">City</label>
+                                            <input type="text" placeholder="Enter City"
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">State</label>
+                                            <input type="text" placeholder="Enter State"
+                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-12">
+                                    <h2 className="text-xl text-slate-900 font-semibold mb-6">Payment</h2>
+                                    <div className="grid gap-4 lg:grid-cols-2">
+                                        <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
+                                            <div>
+                                                <div className="flex items-center">
+                                                    <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card" checked />
+                                                    <label for="card" className="ml-4 flex gap-2 cursor-pointer">
+                                                        <img src="https://readymadeui.com/images/visa.webp" className="w-12" alt="card1" />
+                                                        <img src="https://readymadeui.com/images/american-express.webp" className="w-12" alt="card2" />
+                                                        <img src="https://readymadeui.com/images/master.webp" className="w-12" alt="card3" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <p className="mt-4 text-sm text-slate-500 font-medium">Pay with your debit or credit card</p>
+                                        </div>
+                                        <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
+                                            <div>
+                                                <div className="flex items-center">
+                                                    <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="paypal" />
+                                                    <label for="paypal" className="ml-4 flex gap-2 cursor-pointer">
+                                                        <img src="https://readymadeui.com/images/paypal.webp" className="w-20" alt="paypalCard" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <p className="mt-4 text-sm text-slate-500 font-medium">Pay with your paypal account</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-12 max-w-md">
+                                    <p className="text-slate-900 text-sm font-medium mb-2">Do you have a promo code?</p>
+                                    <div className="flex gap-4">
+                                        <input type="email" placeholder="Promo code"
+                                            className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                        <button type='button' className="flex items-center justify-center font-medium tracking-wide bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer">
+                                            Apply
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div className="relative">
+                            <h2 className="text-xl text-slate-900 font-semibold mb-6">Order Summary</h2>
+                            <ul className="text-slate-500 font-medium space-y-4">
+                                <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">$72.00</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Discount <span className="ml-auto font-semibold text-slate-900">$0.00</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$6.00</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Tax <span className="ml-auto font-semibold text-slate-900">$5.00</span></li>
+                                <hr className="border-slate-300" />
+                                <li className="flex flex-wrap gap-4 text-[15px] font-semibold text-slate-900">Total <span className="ml-auto">$83.00</span></li>
+                            </ul>
+                            <div className="space-y-4 mt-8">
+                                <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-blue-600 hover:bg-blue-700 text-white cursor-pointer">Complete Purchase</button>
+                                <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-gray-100 hover:bg-gray-200 border border-gray-300 text-slate-900 cursor-pointer">Continue Shopping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
