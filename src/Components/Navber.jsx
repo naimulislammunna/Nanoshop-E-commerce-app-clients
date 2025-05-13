@@ -6,6 +6,7 @@ import useAuth from "../Hooks/useAuth";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
+import { IoMdSearch } from "react-icons/io";
 
 // import useAdmin from "../../Hooks/useAdmin";
 
@@ -32,7 +33,7 @@ const Navber = () => {
         <NavLink to='/contact'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Contact Us</button></NavLink>
     </>
     return (
-        <div className="bg-white flex">
+        <div className="bg-black text-white flex">
             <div className="navbar container flex justify-between">
                 <div>
                     <div className="dropdown">
@@ -63,6 +64,14 @@ const Navber = () => {
                         </Link>
                     </div>
                 </div>
+
+                <div>
+                    <form action="" className="bg-white p-1 rounded-lg flex ">
+                        <input className="w-72 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none" placeholder="Search" type="text"/>
+                        <button type="submit" className="p-2 rounded-lg bg-myColor text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
+                    </form>
+                </div>
+
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 flex gap-4">
                         {items}
