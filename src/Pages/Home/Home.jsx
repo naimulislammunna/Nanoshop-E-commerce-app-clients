@@ -5,6 +5,8 @@ import Feature from "./Feature";
 import FeatureCategory from "./FeatureCategory";
 import FeatureProducts from "./FeatureProducts";
 import NewArrival from "./NewArrival";
+import PhoneBanner1 from "./PhoneBanner1";
+import PhoneBanner2 from "./PhoneBanner2";
 import Testimonials from "./Testimonials";
 
 
@@ -14,8 +16,10 @@ const Home = () => {
             <Banner/>
             <Feature/>
             <FeatureProducts/>
+            <PhoneBanner1/>
             <FeatureCategory/>
             <NewArrival/>
+            <PhoneBanner2/>
             <Testimonials/>
             <FAQ/>
             <Contact/>

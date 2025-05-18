@@ -1,4 +1,10 @@
 import { GiDeliveryDrone } from "react-icons/gi";
+import { FaAward } from "react-icons/fa";
+import { IoShieldCheckmark } from "react-icons/io5";
+import { MdFindReplace } from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { CgArrangeBack } from "react-icons/cg";
+import { RiMapPinRangeLine } from "react-icons/ri";
 
 const Feature = () => {
 
@@ -6,42 +12,42 @@ const Feature = () => {
         {
             title: "Warranty",
             subTitle: "12-months warranty",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            icon : <IoShieldCheckmark className="mx-auto" />
         },
         {
             title: "Certified",
             subTitle: "Certified seller",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            icon : <FaAward className="mx-auto" />
         },
         {
             title: "Replacement",
             subTitle: "7-Days Replacement",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            icon : <MdFindReplace className="mx-auto" />
         },
         {
             title: "Track",
             subTitle: "Track your order",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            icon : <FaLocationDot className="mx-auto" />
         },
         {
             title: "Range",
-            subTitle: "Vast Range of Device",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            subTitle: "Range of Device",
+            icon : <CgArrangeBack className="mx-auto" />
         },
         {
             title: "Greener",
             subTitle: "For a Greener Future",
-            icon : <GiDeliveryDrone className="mx-auto" />
+            icon : <RiMapPinRangeLine className="mx-auto" />
         },
     ]
     return (
         <div className="my-10 mx-5 lg:mx-20">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 my-10">
                 {
-                    features.map((item, idx )=> <div key={idx} className="p-4 rounded-xl bg-gray-300 text-center">
-                        <div className="text-5xl text-center">{item.icon}</div>
-                        <h3 className="font-semibold">{item.title}</h3>
-                        <p>{item.subTitle}</p>
+                    features.map((item, idx )=> <div key={idx} className="px-2 py-6 rounded-xl bg-gray-100 text-center">
+                        <div className="text-4xl text-center my-2">{item.icon}</div>
+                        <h3 className="text-lg font-semibold">{item.title}</h3>
+                        <p className="text-sm text-gray-600">{item.subTitle}</p>
                     </div>)
                 }
             </div>
