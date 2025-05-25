@@ -60,7 +60,7 @@ const Navber = () => {
                     <div className="flex ml-5 lg:ml-0 text-center">
                         <Link to='/'>
                             <a className="logo text-3xl text-sky-900 ">Nano<span className="text-myBlue logo">Shop</span></a>
-                            <p className="text-myBlue text-center font-semibold">E-commerce Solution</p>
+                            {/* <p className="text-myBlue text-center font-semibold">E-commerce Solution</p> */}
                         </Link>
                     </div>
                 </div>
