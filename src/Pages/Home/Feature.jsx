@@ -1,4 +1,3 @@
-import { GiDeliveryDrone } from "react-icons/gi";
 import { FaAward } from "react-icons/fa";
 import { IoShieldCheckmark } from "react-icons/io5";
 import { MdFindReplace } from "react-icons/md";

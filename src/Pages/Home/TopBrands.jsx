@@ -1,4 +1,3 @@
-import ProductCard from "../Products/ProductCard";
 
 const TopBrands = () => {
     return (
