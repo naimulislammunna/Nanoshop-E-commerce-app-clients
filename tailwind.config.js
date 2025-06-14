@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "myColor": "#0C4A6E"
+        "myColor": "#33C27A"
       }
     },
   },
