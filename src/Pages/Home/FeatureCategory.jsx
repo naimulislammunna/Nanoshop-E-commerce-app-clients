@@ -18,51 +18,51 @@ const FeatureCategory = () => {
                 <h1 className="text-3xl font-bold text-center">Featured Category</h1>
                 <p className="text-lg font-semibold text-center">Get Your Desired Product from Featured Category</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 my-10">
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><GiDeliveryDrone className="mx-auto"/></div>
                         <p className="font-semibold">Drone</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><RiBattery2ChargeFill className="mx-auto"/></div>
                         <p className="font-semibold">Charger</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><PiFan className="mx-auto"/></div>
                         <p className="font-semibold">Charger Fan</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><IoTvOutline className="mx-auto"/></div>
                         <p className="font-semibold">TV</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><FaMobileAlt className="mx-auto"/></div>
                         <p className="font-semibold">Mobile Phone</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><LuWatch className="mx-auto"/></div>
                         <p className="font-semibold">Smart Watch</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><SlEarphones className="mx-auto"/></div>
                         <p className="font-semibold">Earphone</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><RiMacbookLine className="mx-auto"/></div>
                         <p className="font-semibold">MacBook</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><BsEarbuds className="mx-auto"/></div>
                         <p className="font-semibold">Earbuds</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><LiaTabletSolid className="mx-auto"/></div>
                         <p className="font-semibold">Tablets</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><IoCameraOutline className="mx-auto"/></div>
                         <p className="font-semibold">Camera</p>
                     </div>
-                    <div className="p-7 rounded-xl bg-gray-300 text-center">
+                    <div className="p-7 rounded-xl bg-secondary text-center">
                         <div className="text-5xl text-center"><IoMdPhonePortrait className="mx-auto"/></div>
                         <p className="font-semibold">Power Bank</p>
                     </div>
