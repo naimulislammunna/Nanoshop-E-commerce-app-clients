@@ -43,7 +43,7 @@ const Feature = () => {
         <div className="my-10 mx-5 lg:mx-20">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 my-10">
                 {
-                    features.map((item, idx )=> <div key={idx} className="px-2 py-6 rounded-xl bg-gray-100 text-center">
+                    features.map((item, idx )=> <div key={idx} className="px-2 py-6 rounded-xl bg-secondary text-center">
                         <div className="text-4xl text-center my-2">{item.icon}</div>
                         <h3 className="text-lg font-semibold">{item.title}</h3>
                         <p className="text-sm text-gray-600">{item.subTitle}</p>

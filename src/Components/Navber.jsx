@@ -27,10 +27,10 @@ const Navber = () => {
 
 
     const items = <>
-        <NavLink to='/'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Home</button></NavLink>
-        <NavLink to='/all-products'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Products</button></NavLink>
-        <NavLink to='/about'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">About Us</button></NavLink>
-        <NavLink to='/contact'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Contact Us</button></NavLink>
+        <NavLink to='/'><button className="text-white text-base font-semibold hover:border-b-2 hover:border-white">Home</button></NavLink>
+        <NavLink to='/all-products'><button className="text-white text-base font-semibold hover:border-b-2 hover:border-white">Products</button></NavLink>
+        <NavLink to='/about'><button className="text-white text-base font-semibold hover:border-b-2 hover:border-white">About Us</button></NavLink>
+        <NavLink to='/contact'><button className="text-white text-base font-semibold hover:border-b-2 hover:border-white">Contact Us</button></NavLink>
     </>
     return (
         <div className="bg-black text-white flex">
@@ -59,16 +59,16 @@ const Navber = () => {
                     </div>
                     <div className="flex ml-5 lg:ml-0 text-center">
                         <Link to='/'>
-                            <a className="logo text-3xl text-sky-900 ">Nano<span className="text-myBlue logo">Shop</span></a>
-                            {/* <p className="text-myBlue text-center font-semibold">E-commerce Solution</p> */}
+                            <a className="logo text-2xl text-primary ">Nano<span className="text-white logo">Shop</span></a>
+                            <p className="text-white text-sm text-center font-semibold">E-commerce Solution</p>
                         </Link>
                     </div>
                 </div>
 
                 <div>
                     <form action="" className="bg-white p-1 rounded-lg flex ">
-                        <input className="w-72 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none" placeholder="Search" type="text"/>
-                        <button type="submit" className="p-2 rounded-lg bg-myColor text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
+                        <input className="w-64 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none" placeholder="Search" type="text"/>
+                        <button type="submit" className="p-2 rounded-lg bg-primary text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
                     </form>
                 </div>
 
@@ -80,7 +80,7 @@ const Navber = () => {
                 <div className="flex-none">
                     <Link to="/cart">
                         <div className="relative mx-10 w-fit">
-                            <FaCartShopping className="text-4xl" />
+                            <FaCartShopping className="text-3xl" />
                             <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] text-white">2</span>
                         </div>
                     </Link>

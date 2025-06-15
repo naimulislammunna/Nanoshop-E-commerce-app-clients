@@ -5,7 +5,7 @@ const Banner = () => {
             <div style={{ minHeight: 'inherit' }} className="container flex lg:flex-row flex-col justify-center gap-10">
                 <div className="flex justify-center text-center py-40">
                     <div>
-                        <h1 className="text-5xl font-bold text-myColor">Best E-commerce Shop in Bangladesh</h1>
+                        <h1 className="text-5xl font-bold text-primary">Best E-commerce Shop in Bangladesh</h1>
                         <h3 className="text-xl font-bold">Collect Your Dream From Here</h3>
                     </div>
                 </div>

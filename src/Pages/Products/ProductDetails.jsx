@@ -86,24 +86,24 @@ const ProductDetails = () => {
                             <p className="text-sm font-bold">Ram</p>
                             <div className="flex gap-2">
                                 {
-                                    rams.map((ram, idx) => <button onClick={() => setActiveRam(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRam === idx ? 'border-1 border-myColor text-myColor' : ''}`}>{ram} GB</button>)
+                                    rams.map((ram, idx) => <button onClick={() => setActiveRam(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRam === idx ? 'border-1 border-primary text-primary' : ''}`}>{ram} GB</button>)
                                 }
                             </div>
                             <p className="text-sm  font-bold">Storage</p>
                             <div className="flex gap-2">
                                 {
-                                    roms.map((rom, idx) => <button onClick={() => setActiveRom(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRom === idx ? 'border-1 border-myColor text-myColor' : ''}`}>{rom} GB</button>)
+                                    roms.map((rom, idx) => <button onClick={() => setActiveRom(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRom === idx ? 'border-1 border-primary text-primary' : ''}`}>{rom} GB</button>)
                                 }
                             </div>
                         </div>
                         <div className="flex gap-4 my-3 items-center">
                             <span className="text-sm font-bold">Choose Colour :</span>
                             {
-                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ?  'border-2 border-myColor' : 'border-4 border-white'}`}></div>)
+                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ?  'border-2 border-primary' : 'border-4 border-white'}`}></div>)
                             }
 
                         </div>
-                        <div className="w-36 px-5 py-2 my-5 text-sm flex border-2 border-myColor rounded-full">
+                        <div className="w-36 px-5 py-2 my-5 text-sm flex border border-primary rounded-full">
                             <button onClick={handleMinus} className="hover:text-red-800"><FaMinus /> </button>
                             <p className="font-bold px-7">{quantity}</p>
                             <button onClick={handlePlus} className="hover:text-red-800"><FaPlus /> </button>
@@ -111,11 +111,11 @@ const ProductDetails = () => {
                     </div>
                     <div className="card-actions justify-end">
                     <Link to={'/buynow'}>
-                    <button className="px-4 py-2 text-sm font-bold rounded-full bg-myColor text-white ">Buy Now</button>
+                    <button className="button-2">Buy Now</button>
                     </Link>
                         {
-                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="px-4 py-2 rounded-full bg-myColor text-white">Add to Cart</button> :
-                                <button className="px-4 py-2 text-sm font-bold rounded-full bg-myColor text-white ">Add to Cart</button>
+                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="button-2">Add to Cart</button> :
+                                <button className="button-2">Add to Cart</button>
                         }
 
                     </div>

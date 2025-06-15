@@ -7,7 +7,7 @@ import useUserData from "../../Hooks/useUserData";
 const ProductCard = ({ item }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    const {userData}= useUserData();
+    const { userData } = useUserData();
     const handleWishlist = async (id) => {
         const doc = {
             userEmail: user.email,
@@ -21,23 +21,25 @@ const ProductCard = ({ item }) => {
     }
 
     return (
-        <div className="w-full lg:max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
-            <div className="relative flex h-48 w-full justify-center lg:h-[150px]">
-                <img className="rounded-lg bg-black/40 object-cover" src={item.img} alt="card navigate ui" />
+        <Link to={`/products/${item._id}`}>
+            <div className="w-full lg:max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg border border-secondary hover:border-primary cursor-pointer">
+                <div className="relative flex h-48 w-full justify-center lg:h-[150px]">
+                    <img className="rounded-lg object-cover" src={item.img} alt="card navigate ui" />
+                </div>
+                <div className="space-y-1">
+                    <h6 className="text-sm md:text-base lg:text-sm font-bold">{item.title}</h6>
+                    <p className="text-xs text-gray-400 md:text-sm">Brand: {item.brand}</p>
+                    <p className="text-xs text-gray-400 md:text-sm">Category: {item.category}</p>
+                    <p className="text-sm font-semibold text-red-700">$ {item.price}</p>
+                </div>
+                <div className="flex items-center justify-between gap-1 text-sm md:text-base">
+                    {
+                        userData?.role === "buyer" ? <button onClick={() => handleWishlist(item._id)} className="text-sm text-white  font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> : user?.email ? <button className="text-sm text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A] cursor-not-allowed">Buy Now</button> : <Link to='/sign-in'><button className="text-sm text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
+                    }
+                    <Link><button className="text-sm text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button></Link>
+                </div>
             </div>
-            <div className="space-y-1">
-                <h6 className="text-sm md:text-base lg:text-sm font-bold">{item.title}</h6>
-                <p className="text-xs text-gray-400 md:text-sm">Brand: {item.brand}</p>
-                <p className="text-xs text-gray-400 md:text-sm">Category: {item.category}</p>
-                <p className="text-sm font-semibold text-red-700">$ {item.price}</p>
-            </div>
-            <div className="flex items-center justify-between gap-1 text-sm md:text-base">
-                {
-                    userData?.role === "buyer" ?  <button onClick={() => handleWishlist(item._id)} className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800">Wishlist</button> : user?.email ?  <button className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800 cursor-not-allowed">Wishlist</button> : <Link to='/sign-in'><button className="rounded-lg text-sm border border-sky-900 px-2 py-1  font-semibold duration-300 hover:scale-95 hover:bg-sky-800">Wishlist</button> </Link>
-                }
-                <Link to={`/products/${item._id}`}><button className="rounded-lg text-sm bg-sky-900 px-5 py-1 font-semibold text-white duration-300 hover:scale-95 hover:bg-sky-800">Details</button></Link>
-            </div>
-        </div>
+        </Link>
     );
 };
 

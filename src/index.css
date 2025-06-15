@@ -34,11 +34,24 @@ body{
   }
 }
 .button{
-  background-color: #2D3663;
+  background-color: #33C27A;
   color: white;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 1.75rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.button-2{
+  background-color: #33C27A;
+  color: white;
+  font-size: 0.87rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
   cursor: pointer;
   border: none;
   border-radius: 10rem;
