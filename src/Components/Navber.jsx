@@ -101,14 +101,11 @@ const Navber = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li className="mt-3 ">
-                                <span className="text-myBlue text-sm hover:bg-white">{user?.email}</span>
-                            </li>
-                            <li><Link to='/user-dashboard'>User Dashboard</Link></li>
-                            <li><Link to='/seller-dashboard'>Seller Dashboard</Link></li>
-                            <li><Link to='/admin-dashboard'>Admin Dashboard</Link></li>
-                            <li>{user && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
+                            className="menu menu-sm dropdown-content bg-white text-black rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li className="px-4 py-2"><Link to='/user-dashboard'>User Dashboard</Link></li>
+                            <li className="px-4 py-2"><Link to='/seller-dashboard'>Seller Dashboard</Link></li>
+                            <li className="px-4 py-2"><Link to='/admin-dashboard'>Admin Dashboard</Link></li>
+                            <li>{user && <button className="px-4 py-2 rounded-full text-red-800 font-semibold" onClick={handleLogOut} >Sign Out</button>}</li>
                         </ul>
                     </div>}
                 </div>
