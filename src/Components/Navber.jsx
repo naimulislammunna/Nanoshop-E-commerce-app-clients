@@ -1,5 +1,5 @@
 // import { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../Auth/AuthProvider";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMdSearch } from "react-icons/io";
+import SearchBar from "../Pages/Products/SearchBar";
 
 // import useAdmin from "../../Hooks/useAdmin";
 
@@ -14,6 +15,8 @@ import { IoMdSearch } from "react-icons/io";
 const Navber = () => {
     const { user } = useAuth();
     // const { data } = useAdmin();
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const navigate = useNavigate();
     const { userlogOut } = useContext(AuthContext);
@@ -24,6 +27,7 @@ const Navber = () => {
                 navigate('/')
             })
     }
+
 
 
     const items = <>
@@ -65,12 +69,17 @@ const Navber = () => {
                     </div>
                 </div>
 
-                <div>
-                    <form action="" className="bg-white p-1 rounded-lg flex ">
-                        <input className="w-64 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none" placeholder="Search" type="text"/>
-                        <button type="submit" className="p-2 rounded-lg bg-primary text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
-                    </form>
-                </div>
+                {
+                    currentPath == "/all-products" ? <></> : <Link to={'/all-products'}>
+                    <div>
+                        <form action="" className="bg-white p-1 rounded-lg flex ">
+                            <input className="w-64 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none" placeholder="Search" type="text" />
+                            <button type="submit" className="p-2 rounded-lg bg-primary text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
+                        </form>
+                    </div>
+                </Link> 
+                }
+                
 
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 flex gap-4">

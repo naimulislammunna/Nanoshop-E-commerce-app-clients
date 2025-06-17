@@ -18,7 +18,6 @@ const useUserData = () => {
     })
     
     
-    console.log('user data', userData, isLoading);
 
     if(loading || isLoading) return <Loader/>
     return {userData, isLoading};

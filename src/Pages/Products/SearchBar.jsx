@@ -1,5 +1,6 @@
+import { IoMdSearch } from "react-icons/io";
 
-const SearchBar = ({setSearchValue}) => {
+const SearchBar = ({ setSearchValue }) => {
     const handleSearch = (e) => {
         e.preventDefault();
         const value = e.target.search.value;
@@ -7,9 +8,9 @@ const SearchBar = ({setSearchValue}) => {
     }
     return (
         <div>
-            <form action="" onSubmit={handleSearch}>
-                <input type="text" name="search" className="rounded-lg border border-black bg-transparent px-4 py-2 text-black ring-offset-1 duration-200 focus:outline-none focus:ring-2" placeholder="Search Service" />
-                <button type="submit" className="px-4 py-2 rounded-full bg-sky-950 text-white lg:ml-2">Search</button>
+            <form action="" onSubmit={handleSearch} className="bg-white p-1 rounded-lg flex border border-primary">
+                <input type="text" name="search" className="w-64 rounded-lg bg-transparent px-4 py-1 text-black focus:outline-none " placeholder="Search"/>
+                <button type="submit" className="p-2 rounded-lg bg-primary text-xl text-white lg:ml-2 my-auto"><IoMdSearch /></button>
             </form>
         </div>
     );

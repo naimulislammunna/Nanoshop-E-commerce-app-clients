@@ -22,6 +22,7 @@ const Products = () => {
             return res.data;
         }
     })
+    
 
     const handleReset=()=>{
         setBrand('')

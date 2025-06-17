@@ -22,7 +22,7 @@ const ProductCard = ({ item }) => {
 
     return (
         <Link to={`/products/${item._id}`}>
-            <div className="w-full lg:max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg border border-secondary hover:border-primary cursor-pointer">
+            <div className="w-full lg:max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg border border-secondary hover:border-[1px] hover:border-primary cursor-pointer">
                 <div className="relative flex h-48 w-full justify-center lg:h-[150px]">
                     <img className="rounded-lg object-cover" src={item.img} alt="card navigate ui" />
                 </div>
@@ -34,7 +34,7 @@ const ProductCard = ({ item }) => {
                 </div>
                 <div className="flex items-center justify-between gap-1 text-sm md:text-base">
                     {
-                        userData?.role === "buyer" ? <button onClick={() => handleWishlist(item._id)} className="text-xs text-white  font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> : user?.email ? <button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A] cursor-not-allowed">Buy Now</button> : <Link to='/sign-in'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
+                        user?.email ? <Link to='/buynow'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button></Link> : <Link to='/sign-in'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
                     }
                     <Link><button className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button></Link>
                 </div>
