@@ -15,6 +15,9 @@ const Wishlist = () => {
         }
     })
 
+    console.log("wislist", data);
+    
+
     if(isLoading) return <Loader/>
 
     return (

@@ -1,5 +1,22 @@
+import { useQuery } from "react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useUserData from "../../Hooks/useUserData";
+import Loader from "../../Components/Loader";
 
 const CheckOutForm = () => {
+    const axiosSecure = useAxiosSecure();
+    const { userData } = useUserData();
+
+    const { data, isLoading } = useQuery({
+        queryKey: [userData],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/my-cart/${userData._id}`)
+            return res.data;
+        }
+    })
+
+    if (isLoading) return <Loader />
+
     return (
         <div className="container">
             <div className="bg-white sm:px-8 px-4 py-6">
@@ -85,21 +102,23 @@ const CheckOutForm = () => {
                         <div className="relative">
                             <div>
                                 <h2 className="text-xl text-slate-900 font-semibold mb-6">Your Order</h2>
-                                <div className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
-                                    <div className="flex gap-6 sm:gap-4 max-sm:flex-col">
-                                        <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
-                                            <img src='https://readymadeui.com/images/watch1.webp' className="w-full h-full object-contain" />
-                                        </div>
-                                        <div className="flex flex-col gap-4">
-                                            <div>
-                                                <h3 className="text-sm sm:text-base font-semibold text-slate-900">Stylish Golden Watch</h3>
-                                                <div className="flex mt-1 gap-3">
-                                                <h3 className="text-sm font-semibold text-slate-900">$120.00</h3>
-                                                <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                <div className="gap-4 space-y-2 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+                                    {
+                                        data.map((product ,idx)=> <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
+                                            <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
+                                                <img src={product.img} className="w-full h-full object-contain" />
+                                            </div>
+                                            <div className="flex flex-col gap-4">
+                                                <div>
+                                                    <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
+                                                    <div className="flex mt-1 gap-3">
+                                                        <h3 className="text-sm font-semibold text-slate-900">${product.price}</h3>
+                                                        <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </div>)
+                                    }
                                 </div>
                             </div>
 
