@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import useUserData from "../../Hooks/useUserData";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useState } from "react";
+import useAddToCart from "../../Hooks/useAddToCart";
 
 const ProductDetails = () => {
     const data = useLoaderData();
@@ -22,18 +23,19 @@ const ProductDetails = () => {
     const roms = [128, 256, 512]
 
     const { userData } = useUserData();
+    const {handleMyCart} = useAddToCart();
 
-    const handleMyCart = async (id) => {
-        const doc = {
-            userEmail: user.email,
-            productId: id
-        }
-        const res = await axiosSecure.patch(`/update-cart`, doc);
+    // const handleMyCart = async (id) => {
+    //     const doc = {
+    //         userEmail: user.email,
+    //         productId: id
+    //     }
+    //     const res = await axiosSecure.patch(`/update-cart`, doc);
 
-        if (res.data.modifiedCount) {
-            toast.success("Add to Cart");
-        }
-    }
+    //     if (res.data.modifiedCount) {
+    //         toast.success("Add to Cart");
+    //     }
+    // }
 
     const handlePlus = () => {
         if (quantity < 5) {

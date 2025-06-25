@@ -3,22 +3,14 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useUserData from "../../Hooks/useUserData";
+import useAddToCart from "../../Hooks/useAddToCart";
 
 const ProductCard = ({ item }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const { userData } = useUserData();
-    const handleWishlist = async (id) => {
-        const doc = {
-            userEmail: user.email,
-            productId: id
-        }
-        const res = await axiosSecure.patch(`/update-wishlist`, doc);
-
-        if (res.data.modifiedCount) {
-            toast.success("Add to Wishlish")
-        }
-    }
+    const {handleMyCart} = useAddToCart();
+   
 
     return (
         <Link to={`/products/${item._id}`}>
@@ -36,7 +28,7 @@ const ProductCard = ({ item }) => {
                     {
                         user?.email ? <Link to='/buynow'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button></Link> : <Link to='/sign-in'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
                     }
-                    <Link><button className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button></Link>
+                    <Link><button onClick={() => handleMyCart(item._id)} className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button></Link>
                 </div>
             </div>
         </Link>
