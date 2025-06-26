@@ -5,19 +5,35 @@ import useUserData from "../../Hooks/useUserData";
 import { useQuery } from "react-query";
 import Loader from "../../Components/Loader";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const ShopingCart = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
+    const { user } = useAuth();
 
-    const { data, isLoading } = useQuery({
+    const handleRemoveItem = async (id) => {
+        const doc = {
+            userEmail: user.email,
+            productId: id
+        }
+        const res = await axiosSecure.patch(`/delete-cart-list`, doc);
+
+        if (res.data.modifiedCount) {
+            toast.success("Remove Product");
+            refetch();
+        }
+    }
+
+    const { data, isLoading, refetch } = useQuery({
         queryKey: [userData],
         queryFn: async () => {
             const res = await axiosSecure.get(`/my-cart/${userData._id}`)
             return res.data;
         }
     })
-    console.log("my cart", data);
+
 
     if (isLoading) return <Loader />
     return (
@@ -27,7 +43,7 @@ const ShopingCart = () => {
                 <div className="grid lg:grid-cols-3 lg:gap-x-8 gap-x-6 gap-y-8 mt-6">
                     <div className="lg:col-span-2 space-y-6  p-4 border border-gray-300 rounded-lg">
                         {
-                            data?.map(product => <> <div className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+                            data?.map(product => <div key={product._id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                 <div className="flex gap-6 sm:gap-4 max-sm:flex-col">
                                     <div className="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
                                         <img src={product.img} className="w-full h-full object-contain" />
@@ -45,7 +61,9 @@ const ShopingCart = () => {
 
                                 <div className="ml-auto flex flex-col">
                                     <div className="flex items-start gap-4 justify-end">
-                                        <RiDeleteBinLine className="text-xl cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" />
+                                        <button onClick={() => handleRemoveItem(product._id)}>
+                                            <RiDeleteBinLine className="text-xl cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" />
+                                        </button>
                                     </div>
                                     <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
                                         <button className="hover:text-red-800"><FaMinus /> </button>
@@ -53,7 +71,7 @@ const ShopingCart = () => {
                                         <button className="hover:text-red-800"><FaPlus /> </button>
                                     </div>
                                 </div>
-                            </div></>)
+                            </div>)
                         }
                     </div>
 
