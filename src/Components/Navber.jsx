@@ -8,12 +8,14 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMdSearch } from "react-icons/io";
 import SearchBar from "../Pages/Products/SearchBar";
+import useCartData from "../Hooks/useCartData";
 
 // import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navber = () => {
     const { user } = useAuth();
+    const {cartData, refetch} = useCartData();
     // const { data } = useAdmin();
     const location = useLocation();
     const currentPath = location.pathname;
@@ -28,6 +30,7 @@ const Navber = () => {
             })
     }
 
+console.log("cart data", cartData);
 
 
     const items = <>
@@ -90,7 +93,7 @@ const Navber = () => {
                     <Link to="/cart">
                         <div className="relative mx-10 w-fit">
                             <FaCartShopping className="text-3xl" />
-                            <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] text-white">2</span>
+                            <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] font-semibold text-white">{cartData?.length}</span>
                         </div>
                     </Link>
                     {

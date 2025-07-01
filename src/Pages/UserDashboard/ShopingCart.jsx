@@ -7,11 +7,13 @@ import Loader from "../../Components/Loader";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useCartData from "../../Hooks/useCartData";
 
 const ShopingCart = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
     const { user } = useAuth();
+    const {cartData, refetch} = useCartData();
 
     const handleRemoveItem = async (id) => {
         const doc = {
@@ -26,16 +28,8 @@ const ShopingCart = () => {
         }
     }
 
-    const { data, isLoading, refetch } = useQuery({
-        queryKey: [userData],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/my-cart/${userData._id}`)
-            return res.data;
-        }
-    })
+    
 
-
-    if (isLoading) return <Loader />
     return (
         <div>
             <div className="max-w-5xl max-lg:max-w-2xl mx-auto">
@@ -43,7 +37,7 @@ const ShopingCart = () => {
                 <div className="grid lg:grid-cols-3 lg:gap-x-8 gap-x-6 gap-y-8 mt-6">
                     <div className="lg:col-span-2 space-y-6  p-4 border border-gray-300 rounded-lg">
                         {
-                            data?.map(product => <div key={product._id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+                            cartData?.map(product => <div key={product._id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                 <div className="flex gap-6 sm:gap-4 max-sm:flex-col">
                                     <div className="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
                                         <img src={product.img} className="w-full h-full object-contain" />
