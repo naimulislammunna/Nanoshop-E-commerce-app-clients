@@ -2,10 +2,13 @@ import { useQuery } from "react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
 import Loader from "../../Components/Loader";
+import { useLoaderData } from "react-router-dom";
 
 const CheckOutForm = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
+    const singleData = useLoaderData();
+console.log(singleData, "ssssssssss");
 
     const { data, isLoading } = useQuery({
         queryKey: [userData],
@@ -104,7 +107,21 @@ const CheckOutForm = () => {
                                 <h2 className="text-xl text-slate-900 font-semibold mb-6">Your Order</h2>
                                 <div className="gap-4 space-y-2 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                     {
-                                        data.map((product ,idx)=> <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
+                                       singleData ? <div className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
+                                       <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
+                                           <img src={singleData.img} className="w-full h-full object-contain" />
+                                       </div>
+                                       <div className="flex flex-col gap-4">
+                                           <div>
+                                               <h3 className="text-sm sm:text-base font-semibold text-slate-900">{singleData.title}</h3>
+                                               <div className="flex mt-1 gap-3">
+                                                   <h3 className="text-sm font-semibold text-slate-900">${singleData.price}</h3>
+                                                   <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div> : data.map((product ,idx)=> 
+                                        <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
                                             <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
                                                 <img src={product.img} className="w-full h-full object-contain" />
                                             </div>
@@ -129,7 +146,7 @@ const CheckOutForm = () => {
                                         <div>
                                             <div className="flex items-center">
                                                 <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card" checked />
-                                                <label for="card" className="ml-4 flex gap-2 cursor-pointer">
+                                                <label htmlFor="card" className="ml-4 flex gap-2 cursor-pointer">
                                                     <img src="https://readymadeui.com/images/visa.webp" className="w-12" alt="card1" />
                                                     <img src="https://readymadeui.com/images/american-express.webp" className="w-12" alt="card2" />
                                                     <img src="https://readymadeui.com/images/master.webp" className="w-12" alt="card3" />
@@ -142,7 +159,7 @@ const CheckOutForm = () => {
                                         <div>
                                             <div className="flex items-center">
                                                 <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="paypal" />
-                                                <label for="paypal" className="ml-4 flex gap-2 cursor-pointer">
+                                                <label htmlFor="paypal" className="ml-4 flex gap-2 cursor-pointer">
                                                     <img src="https://readymadeui.com/images/paypal.webp" className="w-20" alt="paypalCard" />
                                                 </label>
                                             </div>

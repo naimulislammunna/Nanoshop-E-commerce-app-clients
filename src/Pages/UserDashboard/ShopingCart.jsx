@@ -13,7 +13,7 @@ const ShopingCart = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
     const { user } = useAuth();
-    const {cartData, refetch} = useCartData();
+    const { cartData, refetch } = useCartData();
 
     const handleRemoveItem = async (id) => {
         const doc = {
@@ -28,7 +28,7 @@ const ShopingCart = () => {
         }
     }
 
-    
+
 
     return (
         <div>
@@ -78,7 +78,9 @@ const ShopingCart = () => {
                             <li className="flex flex-wrap gap-4 text-sm font-semibold text-slate-900">Total <span className="ml-auto">$206.00</span></li>
                         </ul>
                         <div className="mt-8 space-y-4">
-                            <button type="button" className="text-sm px-4 py-2.5 w-full font-medium tracking-wide bg-primary hover:bg-slate-900 text-white rounded-md cursor-pointer">Buy Now</button>
+                            <Link to='/checkout'>
+                                <button type="button" className="text-sm px-4 py-2.5 w-full font-medium tracking-wide bg-primary hover:bg-slate-900 text-white rounded-md cursor-pointer">Buy Now</button>
+                            </Link>
                             <Link to='/all-products'>
                                 <button type="button" className="text-sm my-2 px-4 py-2.5 w-full font-medium tracking-wide bg-slate-50 hover:bg-slate-100 text-slate-900 border border-gray-300 rounded-md cursor-pointer">Continue Shopping</button>
                             </Link>

@@ -15,7 +15,7 @@ import useCartData from "../Hooks/useCartData";
 
 const Navber = () => {
     const { user } = useAuth();
-    const {cartData, refetch} = useCartData();
+    const {cartData} = useCartData();
     // const { data } = useAdmin();
     const location = useLocation();
     const currentPath = location.pathname;
@@ -29,8 +29,6 @@ const Navber = () => {
                 navigate('/')
             })
     }
-
-console.log("cart data", cartData);
 
 
     const items = <>

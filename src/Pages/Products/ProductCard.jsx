@@ -26,7 +26,7 @@ const ProductCard = ({ item }) => {
                 </div>
                 <div className="flex items-center justify-between gap-1 text-sm md:text-base">
                     {
-                        user?.email ? <Link to='/buynow'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button></Link> : <Link to='/sign-in'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
+                        user?.email ? <Link to={`/buynow/${item._id}`}><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button></Link> : <Link to='/sign-in'><button className="text-xs text-white font-semibold px-5 py-2 rounded-md bg-[#33C27A]">Buy Now</button> </Link>
                     }
                     <Link><button onClick={() => handleMyCart(item._id)} className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button></Link>
                 </div>

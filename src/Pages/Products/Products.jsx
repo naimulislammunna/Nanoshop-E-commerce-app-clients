@@ -29,7 +29,6 @@ const Products = () => {
         setSearch('')
         setCategory('')
         setSort('')
-        // window.location.reload()
     }
 
     if(isLoading) return <Loader/>
