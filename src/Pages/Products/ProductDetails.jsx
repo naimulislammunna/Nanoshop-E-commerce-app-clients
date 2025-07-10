@@ -23,7 +23,7 @@ const ProductDetails = () => {
     const roms = [128, 256, 512]
 
     const { userData } = useUserData();
-    const {handleMyCart} = useAddToCart();
+    const { handleMyCart } = useAddToCart();
 
     // const handleMyCart = async (id) => {
     //     const doc = {
@@ -101,7 +101,7 @@ const ProductDetails = () => {
                         <div className="flex gap-4 my-3 items-center">
                             <span className="text-sm font-bold">Choose Colour :</span>
                             {
-                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ?  'border-2 border-primary' : 'border-4 border-white'}`}></div>)
+                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ? 'border-2 border-primary' : 'border-4 border-white'}`}></div>)
                             }
 
                         </div>
@@ -112,9 +112,9 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                    <Link to={'/buynow'}>
-                    <button className="button-2">Buy Now</button>
-                    </Link>
+                        <Link to={`/buynow/${data._id}`}>
+                            <button className="button-2">Buy Now</button>
+                        </Link>
                         {
                             userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="button-2">Add to Cart</button> :
                                 <button className="button-2">Add to Cart</button>
