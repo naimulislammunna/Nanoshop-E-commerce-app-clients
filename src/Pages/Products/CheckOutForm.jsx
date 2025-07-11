@@ -3,12 +3,35 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
 import Loader from "../../Components/Loader";
 import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const CheckOutForm = () => {
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
     const singleData = useLoaderData();
-console.log(singleData, "ssssssssss");
+    const [divisions, setDivisions] = useState([]);
+    const [districts, setDistricts] = useState([]);
+    const [divisionId, setDivisionId] = useState(1);
+
+    useEffect(() => {
+        fetch('https://bdapi.vercel.app/api/v.1/division')
+            .then(res => res.json())
+            .then(data => setDivisions(data.data))
+    }, [])
+
+    useEffect(() => {
+        fetch(`https://bdapi.vercel.app/api/v.1/district/${divisionId}`)
+            .then(res => res.json())
+            .then(data => setDistricts(data.data))
+    }, [divisions, divisionId])
+
+    const handleDivisionChange = (e) => {
+        const selectedId = parseInt(e.target.value);
+        setDivisionId(selectedId)
+    };
+
+
+
 
     const { data, isLoading } = useQuery({
         queryKey: [userData],
@@ -24,40 +47,6 @@ console.log(singleData, "ssssssssss");
         <div className="container">
             <div className="bg-white sm:px-8 px-4 py-6">
                 <div className="max-w-screen-xl max-md:max-w-xl mx-auto">
-                    <div className="flex items-start mb-16">
-                        <div className="w-full">
-                            <div className="flex items-center w-full">
-                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-blue-600 p-1.5 flex items-center justify-center rounded-full">
-                                    <span className="text-sm text-white font-semibold">1</span>
-                                </div>
-                                <div className="w-full h-[3px] mx-4 rounded-lg bg-blue-600"></div>
-                            </div>
-                            <div className="mt-2 mr-4">
-                                <h6 className="text-sm font-semibold text-slate-900">Cart</h6>
-                            </div>
-                        </div>
-                        <div className="w-full">
-                            <div className="flex items-center w-full">
-                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-blue-600 p-1.5 flex items-center justify-center rounded-full">
-                                    <span className="text-sm text-white font-semibold">2</span>
-                                </div>
-                                <div className="w-full h-[3px] mx-4 rounded-lg bg-slate-300"></div>
-                            </div>
-                            <div className="mt-2 mr-4">
-                                <h6 className="text-sm font-semibold text-slate-900">Checkout</h6>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex items-center">
-                                <div className="w-8 h-8 shrink-0 mx-[-1px] bg-slate-300 p-1.5 flex items-center justify-center rounded-full">
-                                    <span className="text-sm text-white font-semibold">3</span>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <h6 className="text-sm font-semibold text-slate-400">Order</h6>
-                            </div>
-                        </div>
-                    </div>
 
                     <div className="grid md:grid-cols-2  gap-y-12 gap-x-8 lg:gap-x-12">
                         <div className="">
@@ -66,7 +55,7 @@ console.log(singleData, "ssssssssss");
                                     <h2 className="text-xl text-slate-900 font-semibold mb-6">Delivery Details</h2>
                                     <div className="grid lg:grid-cols-1 gap-y-6 gap-x-4">
                                         <div>
-                                            <label className="text-sm text-slate-900 font-medium block mb-2">First Name</label>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Your Name</label>
                                             <input type="text" placeholder="Enter First Name"
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
                                         </div>
@@ -81,19 +70,27 @@ console.log(singleData, "ssssssssss");
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
                                         </div>
                                         <div>
-                                            <label className="text-sm text-slate-900 font-medium block mb-2">Address Line</label>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Address Details</label>
                                             <input type="text" placeholder="Enter Address Line"
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
                                         </div>
                                         <div>
-                                            <label className="text-sm text-slate-900 font-medium block mb-2">City</label>
-                                            <input type="text" placeholder="Enter City"
-                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">Division</label>
+                                            <select onChange={(e) => handleDivisionChange(e)} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
+
+                                                {
+                                                    divisions.map((division, idx) => <option key={idx} value={division.id}>{division.name}</option>)
+                                                }
+                                            </select>
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">State</label>
-                                            <input type="text" placeholder="Enter State"
-                                                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            <select name="" id="" className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
+
+                                                {
+                                                    districts.map((district, idx) => <option key={idx} value={district.name}>{district.name}</option>)
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -107,34 +104,34 @@ console.log(singleData, "ssssssssss");
                                 <h2 className="text-xl text-slate-900 font-semibold mb-6">Your Order</h2>
                                 <div className="gap-4 space-y-2 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                     {
-                                       singleData ? <div className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
-                                       <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
-                                           <img src={singleData.img} className="w-full h-full object-contain" />
-                                       </div>
-                                       <div className="flex flex-col gap-4">
-                                           <div>
-                                               <h3 className="text-sm sm:text-base font-semibold text-slate-900">{singleData.title}</h3>
-                                               <div className="flex mt-1 gap-3">
-                                                   <h3 className="text-sm font-semibold text-slate-900">${singleData.price}</h3>
-                                                   <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div> : data.map((product ,idx)=> 
-                                        <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
+                                        singleData ? <div className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
                                             <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
-                                                <img src={product.img} className="w-full h-full object-contain" />
+                                                <img src={singleData.img} className="w-full h-full object-contain" />
                                             </div>
                                             <div className="flex flex-col gap-4">
                                                 <div>
-                                                    <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
+                                                    <h3 className="text-sm sm:text-base font-semibold text-slate-900">{singleData.title}</h3>
                                                     <div className="flex mt-1 gap-3">
-                                                        <h3 className="text-sm font-semibold text-slate-900">${product.price}</h3>
+                                                        <h3 className="text-sm font-semibold text-slate-900">${singleData.price}</h3>
                                                         <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>)
+                                        </div> : data.map((product, idx) =>
+                                            <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
+                                                <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
+                                                    <img src={product.img} className="w-full h-full object-contain" />
+                                                </div>
+                                                <div className="flex flex-col gap-4">
+                                                    <div>
+                                                        <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
+                                                        <div className="flex mt-1 gap-3">
+                                                            <h3 className="text-sm font-semibold text-slate-900">${product.price}</h3>
+                                                            <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>)
                                     }
                                 </div>
                             </div>

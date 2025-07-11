@@ -112,9 +112,15 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <Link to={`/buynow/${data._id}`}>
-                            <button className="button-2">Buy Now</button>
-                        </Link>
+                        {
+                            user?.email ? <Link to={`/buynow/${data._id}`}>
+                                <button className="button-2">Buy Now</button>
+                            </Link>
+                                :
+                                <Link to='/sign-in'>
+                                    <button className="button-2">Buy Now</button>
+                                </Link>
+                        }
                         {
                             userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="button-2">Add to Cart</button> :
                                 <button className="button-2">Add to Cart</button>
