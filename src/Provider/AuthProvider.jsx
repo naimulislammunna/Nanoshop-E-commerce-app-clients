@@ -7,9 +7,20 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+    
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic();
+
+    const [quantity, setQuantity] = useState(null);
+    const [price, setPrice] = useState(null);
+
+    const productQuantityAndPrice = (quantity, price) => {
+        setQuantity(quantity)
+        setPrice(price)
+    }
+    
+    
 
     const handleRegisterUser = (email, password) => {
         setLoading(true)
@@ -18,7 +29,7 @@ const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider();
 
-    const handleGoogleSignIn = ()=>{
+    const handleGoogleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
@@ -69,7 +80,10 @@ const AuthProvider = ({ children }) => {
         loading,
         userSignIn,
         userlogOut,
-        handleGoogleSignIn
+        handleGoogleSignIn,
+        productQuantityAndPrice,
+        quantity,
+        price
     }
 
     return (

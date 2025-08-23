@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMdSearch } from "react-icons/io";
-import SearchBar from "../Pages/Products/SearchBar";
 import useCartData from "../Hooks/useCartData";
 
 // import useAdmin from "../../Hooks/useAdmin";

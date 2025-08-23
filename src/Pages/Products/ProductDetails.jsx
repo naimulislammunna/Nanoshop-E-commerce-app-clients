@@ -4,23 +4,36 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useUserData from "../../Hooks/useUserData";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAddToCart from "../../Hooks/useAddToCart";
+import { AuthContext } from "../../Provider/AuthProvider";
+import useProductQuantityAndPrice from "../../Hooks/useProductQuantityAndPrice";
 
 const ProductDetails = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
+    const { user, productQuantityAndPrice } = useAuth();
+    const price = parseInt(data?.price);
     const [quantity, setQuantity] = useState(1);
-    const pricePerProduct = parseInt(data?.price);
+    const productPrice = quantity * price;
+
+    useEffect(() => { 
+        productQuantityAndPrice(quantity, productPrice) 
+    }, [quantity])
+
+
+
+    // const [quantity, setQuantity] = useState(1);
+
+
     // const [price, setPrice] = useState(pricePerProduct);
     const [activeRam, setActiveRam] = useState(0);
     const [activeRom, setActiveRom] = useState(0);
     const [activeColor, setActiveColor] = useState(0);
 
-    const colours = ["#800020", "#A020F0", "#87CEEB", "black"]
+    const colours = ["#800020", "#A020F0", "#87CEEB", "black"];
     const rams = [8, 16, 32];
-    const roms = [128, 256, 512]
+    const roms = [128, 256, 512];
 
     const { userData } = useUserData();
     const { handleMyCart } = useAddToCart();
@@ -37,20 +50,22 @@ const ProductDetails = () => {
     //     }
     // }
 
+
     const handlePlus = () => {
         if (quantity < 5) {
-            setQuantity((prevQuantity) => prevQuantity + 1)
-            // setPrice((amount) => amount + pricePerProduct)
+            setQuantity((prevQuantity) => prevQuantity + 1);
+            productQuantityAndPrice(quantity, productPrice)
         }
+
     }
 
     const handleMinus = () => {
         if (quantity > 1) {
             setQuantity((prevQuantity) => prevQuantity - 1)
-            // setPrice((amount) => amount - pricePerProduct)
+            productQuantityAndPrice(quantity, productPrice)
         }
-    }
 
+    }
 
     // image slider 
     const [currentSlider, setCurrentSlider] = useState(0);
@@ -105,10 +120,15 @@ const ProductDetails = () => {
                             }
 
                         </div>
-                        <div className="w-36 px-5 py-2 my-5 text-sm flex border border-primary rounded-full">
-                            <button onClick={handleMinus} className="hover:text-red-800"><FaMinus /> </button>
-                            <p className="font-bold px-7">{quantity}</p>
-                            <button onClick={handlePlus} className="hover:text-red-800"><FaPlus /> </button>
+                        <div className="flex items-center gap-3">
+                            <div className="w-36 px-5 py-2 my-5 text-sm flex border border-primary rounded-full">
+                                <button onClick={handleMinus} className="hover:text-red-800"><FaMinus /> </button>
+                                <p className="font-bold px-7">{quantity}</p>
+                                <button onClick={handlePlus} className="hover:text-red-800"><FaPlus /> </button>
+                            </div>
+                            <div>
+                                <p className="text-red-700 text-lg font-semibold">$ {price}</p>
+                            </div>
                         </div>
                     </div>
                     <div className="card-actions justify-end">

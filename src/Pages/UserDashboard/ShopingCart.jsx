@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useCartData from "../../Hooks/useCartData";
+import useProductQuantityAndPrice from "../../Hooks/useProductQuantityAndPrice";
 
 const ShopingCart = () => {
+    const { handleMinus, handlePlus, quantity, price } = useProductQuantityAndPrice();
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
     const { user } = useAuth();
@@ -27,7 +29,13 @@ const ShopingCart = () => {
             refetch();
         }
     }
+    const handleQuantityPlus = () => {
+        handlePlus();
+    }
 
+    const handleQuantityMinus = () => {
+        handleMinus();
+    }
 
 
     return (
@@ -48,7 +56,7 @@ const ShopingCart = () => {
                                             <p className="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
                                         </div>
                                         <div className="mt-auto">
-                                            <h3 className="text-sm font-semibold text-slate-900">${product.price}</h3>
+                                            <h3 className="text-sm font-semibold text-slate-900">${price}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -60,9 +68,9 @@ const ShopingCart = () => {
                                         </button>
                                     </div>
                                     <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
-                                        <button className="hover:text-red-800"><FaMinus /> </button>
-                                        <p className="font-bold px-2">2</p>
-                                        <button className="hover:text-red-800"><FaPlus /> </button>
+                                        <button onClick={handleQuantityMinus} className="hover:text-red-800"><FaMinus /> </button>
+                                        <p className="font-bold px-2">{quantity}</p>
+                                        <button onClick={handleQuantityPlus} className="hover:text-red-800"><FaPlus /> </button>
                                     </div>
                                 </div>
                             </div>)
