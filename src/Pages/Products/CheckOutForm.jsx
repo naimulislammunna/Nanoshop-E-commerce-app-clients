@@ -2,9 +2,10 @@ import { useQuery } from "react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useUserData from "../../Hooks/useUserData";
 import Loader from "../../Components/Loader";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import usePriceCalculation from "../../Hooks/usePriceCalculation";
 
 const CheckOutForm = () => {
     const axiosSecure = useAxiosSecure();
@@ -16,17 +17,18 @@ const CheckOutForm = () => {
 
 
 
-
+    const { prices, totalQuantity } =usePriceCalculation();
     const { quantity, price } = useAuth();
     const shippingCharge = 25;
-    const subtotal = price + shippingCharge;
+    const subtotal = prices ? (prices + shippingCharge) : (price + shippingCharge);
+    const productQuantity = totalQuantity ? totalQuantity : quantity;
     const [discountValue, setDiscountValue] = useState();
     const [discountPrice, setDiscountPrice] = useState();
     const [totalPrice, setTotalPrice] = useState(subtotal);
 
     const handleDiscountPrice = () => {
         if (discountValue == "MERN") {
-            const discount = price * 0.1;
+            const discount = (price * 0.1).toFixed(2);
             setDiscountPrice(discount);
             const totalPrice = (price - discount) + shippingCharge;
             setTotalPrice(totalPrice);
@@ -192,7 +194,7 @@ const CheckOutForm = () => {
                                 <div className="flex gap-4">
                                     <input onChange={(e) => setDiscountValue(e.target.value)} type="text" name="discount" placeholder="Promo code"
                                         className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
-                                    <button onClick={handleDiscountPrice} type='button' className="flex items-center justify-center font-medium tracking-wide bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer">
+                                    <button onClick={handleDiscountPrice} type='button' className="flex items-center justify-center font-medium tracking-wide bg-slate-900 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer">
                                         Apply
                                     </button>
                                 </div>
@@ -200,16 +202,18 @@ const CheckOutForm = () => {
                             </div>
                             <h2 className="text-xl text-slate-900 font-semibold mb-6 mt-6">Order Summary</h2>
                             <ul className="text-slate-500 font-medium space-y-4">
-                                <li className="flex flex-wrap gap-4 text-sm">Item Quantity<span className="ml-auto font-semibold text-slate-900">{quantity}</span></li>
-                                <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${price}</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Item Quantity<span className="ml-auto font-semibold text-slate-900">{productQuantity}</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${subtotal}</span></li>
                                 <li className="flex flex-wrap gap-4 text-sm">Discount <span className="ml-auto font-semibold text-slate-900">${discountPrice}</span></li>
                                 <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$25.00</span></li>
                                 <hr className="border-slate-300" />
                                 <li className="flex flex-wrap gap-4 text-[15px] font-semibold text-slate-900">Total <span className="ml-auto">${totalPrice}</span></li>
                             </ul>
                             <div className="space-y-4 mt-8">
-                                <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-blue-600 hover:bg-blue-700 text-white cursor-pointer">Complete Purchase</button>
-                                <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-gray-100 hover:bg-gray-200 border border-gray-300 text-slate-900 cursor-pointer">Continue Shopping</button>
+                                <button type="button" className="rounded-md px-4 py-2.5 my-2 w-full text-sm font-medium tracking-wide bg-primary hover:bg-slate-900 text-white cursor-pointer">Complete Purchase</button>
+                                <Link to="/all-products">
+                                    <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-gray-100 hover:bg-gray-200 border border-gray-300 text-slate-900 cursor-pointer">Continue Shopping</button>
+                                </Link>
                             </div>
                         </div>
                     </div>

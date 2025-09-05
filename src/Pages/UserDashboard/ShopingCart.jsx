@@ -8,14 +8,18 @@ import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useCartData from "../../Hooks/useCartData";
-import useProductQuantityAndPrice from "../../Hooks/useProductQuantityAndPrice";
+import usePriceCalculation from "../../Hooks/usePriceCalculation";
 
 const ShopingCart = () => {
-    const { handleMinus, handlePlus, quantity, price } = useProductQuantityAndPrice();
     const axiosSecure = useAxiosSecure();
     const { userData } = useUserData();
     const { user } = useAuth();
-    const { cartData, refetch } = useCartData();
+    const { cartData} = useCartData();
+    const {prices} = usePriceCalculation();
+
+    const shippingCost = 25;
+    const totalPrice = prices + shippingCost;
+
 
     const handleRemoveItem = async (id) => {
         const doc = {
@@ -28,13 +32,6 @@ const ShopingCart = () => {
             toast.success("Remove Product");
             refetch();
         }
-    }
-    const handleQuantityPlus = () => {
-        handlePlus();
-    }
-
-    const handleQuantityMinus = () => {
-        handleMinus();
     }
 
 
@@ -55,8 +52,9 @@ const ShopingCart = () => {
                                             <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
                                             <p className="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
                                         </div>
-                                        <div className="mt-auto">
-                                            <h3 className="text-sm font-semibold text-slate-900">${price}</h3>
+                                        <div className="mt-auto flex gap-4">
+                                            <h3 className="text-sm font-semibold text-slate-500">Quantity: {product.quantity}</h3>
+                                            <h3 className="text-sm font-semibold text-slate-500">Total Price:<span className="text-red-500"> $  {product.productPrice}</span></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -67,11 +65,11 @@ const ShopingCart = () => {
                                             <RiDeleteBinLine className="text-xl cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" />
                                         </button>
                                     </div>
-                                    <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
-                                        <button onClick={handleQuantityMinus} className="hover:text-red-800"><FaMinus /> </button>
-                                        <p className="font-bold px-2">{quantity}</p>
-                                        <button onClick={handleQuantityPlus} className="hover:text-red-800"><FaPlus /> </button>
-                                    </div>
+                                    {/* <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
+                                        <button className="hover:text-red-800"><FaMinus /> </button>
+                                        <p className="font-bold px-2">{}</p>
+                                        <button className="hover:text-red-800"><FaPlus /> </button>
+                                    </div> */}
                                 </div>
                             </div>)
                         }
@@ -79,11 +77,11 @@ const ShopingCart = () => {
 
                     <div className="bg-white rounded-md px-4 py-6 h-max shadow-sm border border-gray-200">
                         <ul className="text-slate-500 font-medium space-y-4">
-                            <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">$200.00</span></li>
-                            <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$2.00</span></li>
-                            <li className="flex flex-wrap gap-4 text-sm">Tax <span className="ml-auto font-semibold text-slate-900">$4.00</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${prices}</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$25.00</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm">Tax <span className="ml-auto font-semibold text-slate-900">$0.00</span></li>
                             <hr className="border-slate-300" />
-                            <li className="flex flex-wrap gap-4 text-sm font-semibold text-slate-900">Total <span className="ml-auto">$206.00</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm font-semibold text-slate-900">Total <span className="ml-auto">${totalPrice}</span></li>
                         </ul>
                         <div className="mt-8 space-y-4">
                             <Link to='/checkout'>

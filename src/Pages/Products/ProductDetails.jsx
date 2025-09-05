@@ -6,8 +6,6 @@ import useUserData from "../../Hooks/useUserData";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import useAddToCart from "../../Hooks/useAddToCart";
-import { AuthContext } from "../../Provider/AuthProvider";
-import useProductQuantityAndPrice from "../../Hooks/useProductQuantityAndPrice";
 
 const ProductDetails = () => {
     const data = useLoaderData();
@@ -17,8 +15,8 @@ const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const productPrice = quantity * price;
 
-    useEffect(() => { 
-        productQuantityAndPrice(quantity, productPrice) 
+    useEffect(() => {
+        productQuantityAndPrice(quantity, productPrice)
     }, [quantity])
 
 
@@ -28,15 +26,26 @@ const ProductDetails = () => {
 
     // const [price, setPrice] = useState(pricePerProduct);
     const [activeRam, setActiveRam] = useState(0);
-    const [activeRom, setActiveRom] = useState(0);
+    const [selectRam, setSelectRam] = useState(0);
+    const [activeStorage, setActiveStorage] = useState(0);
+    const [selectStorage, setSelectStorage] = useState(0);
     const [activeColor, setActiveColor] = useState(0);
 
     const colours = ["#800020", "#A020F0", "#87CEEB", "black"];
     const rams = [8, 16, 32];
-    const roms = [128, 256, 512];
+    const storages = [128, 256, 512];
 
     const { userData } = useUserData();
     const { handleMyCart } = useAddToCart();
+
+    const handleSelectRam = (value) => {
+        setSelectRam(value);
+    }
+    const handleSelectStorage = (value) => {
+        setSelectStorage(value);
+    }
+    console.log('rammmm', selectRam, selectStorage);
+
 
     // const handleMyCart = async (id) => {
     //     const doc = {
@@ -103,13 +112,13 @@ const ProductDetails = () => {
                             <p className="text-sm font-bold">Ram</p>
                             <div className="flex gap-2">
                                 {
-                                    rams.map((ram, idx) => <button onClick={() => setActiveRam(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRam === idx ? 'border-1 border-primary text-primary' : ''}`}>{ram} GB</button>)
+                                    rams.map((ram, idx) => <button onClick={() => { handleSelectRam(ram); setActiveRam(idx) }} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRam === idx ? 'border-1 border-primary text-primary' : ''}`}>{ram} GB</button>)
                                 }
                             </div>
                             <p className="text-sm  font-bold">Storage</p>
                             <div className="flex gap-2">
                                 {
-                                    roms.map((rom, idx) => <button onClick={() => setActiveRom(idx)} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeRom === idx ? 'border-1 border-primary text-primary' : ''}`}>{rom} GB</button>)
+                                    storages.map((storage, idx) => <button value={storage} onClick={() => { handleSelectStorage(storage); setActiveStorage(idx) }} key={idx} className={`px-5 py-1 bg-white my-2 text-sm rounded-md border ${activeStorage === idx ? 'border-1 border-primary text-primary' : ''}`}>{storage} GB</button>)
                                 }
                             </div>
                         </div>
@@ -142,7 +151,7 @@ const ProductDetails = () => {
                                 </Link>
                         }
                         {
-                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id)} className="button-2">Add to Cart</button> :
+                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id, data.img, data.title, quantity, productPrice)} className="button-2">Add to Cart</button> :
                                 <button className="button-2">Add to Cart</button>
                         }
 

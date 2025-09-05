@@ -8,10 +8,14 @@ const useAddToCart = () => {
     const axiosSecure = useAxiosSecure();
     const {refetch} = useCartData();
 
-    const handleMyCart = async (id) => {
+    const handleMyCart = async (id, img, title,  quantity, productPrice) => {
         const doc = {
             userEmail: user.email,
-            productId: id
+            productId: id,
+            img,
+            title,
+            quantity,
+            productPrice
         }
         const res = await axiosSecure.patch(`/update-cart`, doc);
 
