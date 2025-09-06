@@ -15,8 +15,6 @@ const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1);
 
 
-    // const [quantity, setQuantity] = useState(1);
-
 
     // const [price, setPrice] = useState(pricePerProduct);
     const colours = ["#800020", "#A020F0", "#87CEEB", "black"];

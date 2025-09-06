@@ -21,10 +21,15 @@ const useAddToCart = () => {
             quantity
         }
         const res = await axiosSecure.patch(`/update-cart`, doc);
+        console.log(res);
+        
 
-        if (res.data.modifiedCount) {
-            toast.success("Added to Cart");
+        if (res.data.success == true) {
+            toast.success(res.data.message);
             refetch();
+        }
+        else {
+            toast.error(res.data.message);
         }
     }
     return {handleMyCart}

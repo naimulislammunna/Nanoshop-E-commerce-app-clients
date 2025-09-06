@@ -4,12 +4,23 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useUserData from "../../Hooks/useUserData";
 import useAddToCart from "../../Hooks/useAddToCart";
+import { useState } from "react";
 
 const ProductCard = ({ item }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const { userData } = useUserData();
     const { handleMyCart } = useAddToCart();
+
+    const colours = ["#800020", "#A020F0", "#87CEEB", "black"];
+    const rams = [8, 16, 32];
+    const storages = [128, 256, 512];
+
+
+    const [quantity, setQuantity] = useState(1);
+    const [selectRam, setSelectRam] = useState(rams[0]);
+    const [selectStorage, setSelectStorage] = useState(storages[0]);
+    const [selectColor, setSelectColor] = useState(colours[0]);
 
 
     return (
@@ -35,7 +46,7 @@ const ProductCard = ({ item }) => {
                             </Link>
                     }
                     {
-                        user?.email ? <Link><button onClick={() => handleMyCart(item._id)} className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button> </Link> 
+                        user?.email ? <Link><button onClick={() => handleMyCart(item._id, item?.img, item?.title, item?.price, selectRam, selectStorage, selectColor, quantity)} className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button> </Link>
                             :
                             <Link to='/sign-in'>
                                 <button className="text-xs text-[#33C27A] font-semibold px-5 py-2 rounded-md bg-white border border-[#33C27A] hover:text-black">Add to Cart</button>
