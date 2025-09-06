@@ -10,30 +10,28 @@ import useAddToCart from "../../Hooks/useAddToCart";
 const ProductDetails = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
-    const { user, productQuantityAndPrice } = useAuth();
+    const { user } = useAuth();
     const price = parseInt(data?.price);
     const [quantity, setQuantity] = useState(1);
-    const productPrice = quantity * price;
-
-    useEffect(() => {
-        productQuantityAndPrice(quantity, productPrice)
-    }, [quantity])
-
 
 
     // const [quantity, setQuantity] = useState(1);
 
 
     // const [price, setPrice] = useState(pricePerProduct);
-    const [activeRam, setActiveRam] = useState(0);
-    const [selectRam, setSelectRam] = useState(0);
-    const [activeStorage, setActiveStorage] = useState(0);
-    const [selectStorage, setSelectStorage] = useState(0);
-    const [activeColor, setActiveColor] = useState(0);
-
     const colours = ["#800020", "#A020F0", "#87CEEB", "black"];
     const rams = [8, 16, 32];
     const storages = [128, 256, 512];
+
+    const [activeRam, setActiveRam] = useState(0);
+    const [activeStorage, setActiveStorage] = useState(0);
+    const [activeColor, setActiveColor] = useState(0);
+
+    const [selectRam, setSelectRam] = useState(rams[0]);
+    const [selectStorage, setSelectStorage] = useState(storages[0]);
+    const [selectColor, setSelectColor] = useState(colours[0]);
+
+    
 
     const { userData } = useUserData();
     const { handleMyCart } = useAddToCart();
@@ -44,7 +42,8 @@ const ProductDetails = () => {
     const handleSelectStorage = (value) => {
         setSelectStorage(value);
     }
-    console.log('rammmm', selectRam, selectStorage);
+
+    // img , titile, price, quantity, ram, rom, color
 
 
     // const handleMyCart = async (id) => {
@@ -63,7 +62,6 @@ const ProductDetails = () => {
     const handlePlus = () => {
         if (quantity < 5) {
             setQuantity((prevQuantity) => prevQuantity + 1);
-            productQuantityAndPrice(quantity, productPrice)
         }
 
     }
@@ -71,7 +69,6 @@ const ProductDetails = () => {
     const handleMinus = () => {
         if (quantity > 1) {
             setQuantity((prevQuantity) => prevQuantity - 1)
-            productQuantityAndPrice(quantity, productPrice)
         }
 
     }
@@ -125,7 +122,7 @@ const ProductDetails = () => {
                         <div className="flex gap-4 my-3 items-center">
                             <span className="text-sm font-bold">Choose Colour :</span>
                             {
-                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ? 'border-2 border-primary' : 'border-4 border-white'}`}></div>)
+                                colours.map((colour, idx) => <div style={{ backgroundColor: colour }} onClick={() => [setCurrentSlider(idx), setSelectColor(colour), setActiveColor(idx)]} key={idx} className={`w-7 h-7 rounded-full  cursor-pointer ${activeColor === idx ? 'border-2 border-primary' : 'border-4 border-white'}`}></div>)
                             }
 
                         </div>
@@ -151,7 +148,7 @@ const ProductDetails = () => {
                                 </Link>
                         }
                         {
-                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data._id, data.img, data.title, quantity, productPrice)} className="button-2">Add to Cart</button> :
+                            userData?.role === "buyer" ? <button onClick={() => handleMyCart(data?._id, data?.img, data?.title, data?.price, selectRam, selectStorage, selectColor, quantity)} className="button-2">Add to Cart</button> :
                                 <button className="button-2">Add to Cart</button>
                         }
 

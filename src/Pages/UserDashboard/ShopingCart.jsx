@@ -45,16 +45,16 @@ const ShopingCart = () => {
                             cartData?.map(product => <div key={product._id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                 <div className="flex gap-6 sm:gap-4 max-sm:flex-col">
                                     <div className="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
-                                        <img src={product.img} className="w-full h-full object-contain" />
+                                        <img src={product?.img} className="w-full h-full object-contain" />
                                     </div>
                                     <div className="flex flex-col gap-4">
                                         <div>
-                                            <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
-                                            <p className="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                            <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product?.title}</h3>
+                                            <p className="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">Color: <span style={{backgroundColor: product?.color }} className={`inline-block w-4 h-4 rounded-sm `}></span></p>
                                         </div>
                                         <div className="mt-auto flex gap-4">
-                                            <h3 className="text-sm font-semibold text-slate-500">Quantity: {product.quantity}</h3>
-                                            <h3 className="text-sm font-semibold text-slate-500">Total Price:<span className="text-red-500"> $  {product.productPrice}</span></h3>
+                                            <h3 className="text-sm font-semibold text-slate-500">Quantity: {product?.quantity}</h3>
+                                            <h3 className="text-sm font-semibold text-slate-500"><span className="text-red-500"> $  {product?.price}</span></h3>
                                         </div>
                                     </div>
                                 </div>

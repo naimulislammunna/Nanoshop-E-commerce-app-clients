@@ -12,15 +12,6 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic();
 
-    const [quantity, setQuantity] = useState(null);
-    const [price, setPrice] = useState(null);
-
-    const productQuantityAndPrice = (quantity, price) => {
-        setQuantity(quantity)
-        setPrice(price)
-    }
-    
-    
 
     const handleRegisterUser = (email, password) => {
         setLoading(true)
@@ -80,10 +71,7 @@ const AuthProvider = ({ children }) => {
         loading,
         userSignIn,
         userlogOut,
-        handleGoogleSignIn,
-        productQuantityAndPrice,
-        quantity,
-        price
+        handleGoogleSignIn
     }
 
     return (
