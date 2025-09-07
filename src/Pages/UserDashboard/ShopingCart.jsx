@@ -1,8 +1,6 @@
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useUserData from "../../Hooks/useUserData";
-import { useQuery } from "react-query";
 import Loader from "../../Components/Loader";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
@@ -12,14 +10,12 @@ import usePriceCalculation from "../../Hooks/usePriceCalculation";
 
 const ShopingCart = () => {
     const axiosSecure = useAxiosSecure();
-    const { userData } = useUserData();
     const { user } = useAuth();
-    const { cartData} = useCartData();
-    const {prices} = usePriceCalculation();
-
+    const { cartData, refetch, isLoading} = useCartData();
+    const {totalPrice: subTotal} = usePriceCalculation();
+    
     const shippingCost = 25;
-    const totalPrice = prices + shippingCost;
-
+    const totalPrice = subTotal + shippingCost;
 
     const handleRemoveItem = async (id) => {
         const doc = {
@@ -33,6 +29,7 @@ const ShopingCart = () => {
             refetch();
         }
     }
+    if (isLoading) return <Loader />
 
 
     return (
@@ -42,7 +39,7 @@ const ShopingCart = () => {
                 <div className="grid lg:grid-cols-3 lg:gap-x-8 gap-x-6 gap-y-8 mt-6">
                     <div className="lg:col-span-2 space-y-6  p-4 border border-gray-300 rounded-lg">
                         {
-                            cartData?.map(product => <div key={product._id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+                            cartData?.map(product => <div key={product.id} className="flex gap-4 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                 <div className="flex gap-6 sm:gap-4 max-sm:flex-col">
                                     <div className="w-24 h-24 max-sm:w-24 max-sm:h-24 shrink-0">
                                         <img src={product?.img} className="w-full h-full object-contain" />
@@ -50,26 +47,27 @@ const ShopingCart = () => {
                                     <div className="flex flex-col gap-4">
                                         <div>
                                             <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product?.title}</h3>
-                                            <p className="text-[13px] font-medium text-slate-500 mt-2 flex items-center gap-2">Color: <span style={{backgroundColor: product?.color }} className={`inline-block w-4 h-4 rounded-sm `}></span></p>
-                                        </div>
-                                        <div className="mt-auto flex gap-4">
-                                            <h3 className="text-sm font-semibold text-slate-500">Quantity: {product?.quantity}</h3>
-                                            <h3 className="text-sm font-semibold text-slate-500"><span className="text-red-500"> $  {product?.price}</span></h3>
+                                            <p className="text-[13px] font-medium text-slate-500 mt-1 flex items-center gap-2">{product?.ram}/{product?.storage} GB</p>
+                                            <p className="text-[13px] font-medium text-slate-500 mt-1 flex items-center gap-2">Color: <span style={{backgroundColor: product?.color }} className={`inline-block w-4 h-4 rounded-sm `}></span></p>
+                                            <div className="flex gap-4">
+                                                <p className="text-[13px] font-medium text-slate-500 mt-1">Quantity: {product?.quantity}</p>
+                                            <p className="text-[13px] font-medium text-slate-500 mt-1"><span className="text-red-500"> $  {product?.price}</span></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="ml-auto flex flex-col">
                                     <div className="flex items-start gap-4 justify-end">
-                                        <button onClick={() => handleRemoveItem(product._id)}>
+                                        <button onClick={() => handleRemoveItem(product.id)}>
                                             <RiDeleteBinLine className="text-xl cursor-pointer fill-slate-400 hover:fill-red-600 inline-block" />
                                         </button>
                                     </div>
-                                    {/* <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
+                                    <div className="px-3 py-1 text-sm flex items-center gap-3 mt-auto border border-slate-900 rounded-full">
                                         <button className="hover:text-red-800"><FaMinus /> </button>
-                                        <p className="font-bold px-2">{}</p>
+                                        <p className="font-bold px-2">{2}</p>
                                         <button className="hover:text-red-800"><FaPlus /> </button>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>)
                         }
@@ -77,8 +75,8 @@ const ShopingCart = () => {
 
                     <div className="bg-white rounded-md px-4 py-6 h-max shadow-sm border border-gray-200">
                         <ul className="text-slate-500 font-medium space-y-4">
-                            <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${prices}</span></li>
-                            <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$25.00</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${subTotal}</span></li>
+                            <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">${shippingCost}</span></li>
                             <li className="flex flex-wrap gap-4 text-sm">Tax <span className="ml-auto font-semibold text-slate-900">$0.00</span></li>
                             <hr className="border-slate-300" />
                             <li className="flex flex-wrap gap-4 text-sm font-semibold text-slate-900">Total <span className="ml-auto">${totalPrice}</span></li>

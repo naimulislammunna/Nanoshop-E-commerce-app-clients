@@ -1,23 +1,20 @@
-import { useQuery } from "react-query";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useUserData from "../../Hooks/useUserData";
 import Loader from "../../Components/Loader";
 import { Link, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import usePriceCalculation from "../../Hooks/usePriceCalculation";
+import useCartData from "../../Hooks/useCartData";
 
 const CheckOutForm = () => {
-    const axiosSecure = useAxiosSecure();
-    const { userData } = useUserData();
     const singleData = useLoaderData();
+    const { cartData, isLoading } = useCartData();
     const [divisions, setDivisions] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [divisionId, setDivisionId] = useState(1);
 
 
 
-    const { prices, totalQuantity } =usePriceCalculation();
+    const { totalPrice: prices, totalQuantity } = usePriceCalculation();
     const { quantity, price } = useAuth();
     const shippingCharge = 25;
     const subtotal = prices ? (prices + shippingCharge) : (price + shippingCharge);
@@ -54,19 +51,7 @@ const CheckOutForm = () => {
         setDivisionId(selectedId)
     };
 
-
-
-
-    const { data, isLoading } = useQuery({
-        queryKey: [userData],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/my-cart/${userData._id}`)
-            return res.data;
-        }
-    })
-
     if (isLoading) return <Loader />
-
     return (
         <div className="container">
             <div className="bg-white sm:px-8 px-4 py-6">
@@ -126,7 +111,7 @@ const CheckOutForm = () => {
                         <div className="relative">
                             <div>
                                 <h2 className="text-xl text-slate-900 font-semibold mb-6">Your Order</h2>
-                                <div className="gap-4 space-y-2 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
+                                <div className=" gap-4 space-y-2 bg-white px-4 py-6 rounded-md shadow-sm border border-gray-200">
                                     {
                                         singleData ? <div className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
                                             <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
@@ -141,7 +126,7 @@ const CheckOutForm = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> : data.map((product, idx) =>
+                                        </div> : cartData.map((product, idx) =>
                                             <div key={idx} className="flex p-2 gap-6 sm:gap-4 max-sm:flex-col border border-gray-200 rounded-lg">
                                                 <div className="w-10 h-12 max-sm:w-12 max-sm:h-12 shrink-0">
                                                     <img src={product.img} className="w-full h-full object-contain" />
@@ -150,8 +135,8 @@ const CheckOutForm = () => {
                                                     <div>
                                                         <h3 className="text-sm sm:text-base font-semibold text-slate-900">{product.title}</h3>
                                                         <div className="flex mt-1 gap-3">
-                                                            <h3 className="text-sm font-semibold text-slate-900">${product.price}</h3>
-                                                            <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span className="inline-block w-4 h-4 rounded-sm bg-[#ac7f48]"></span></p>
+                                                            <h3 className="text-[13px] font-medium text-slate-500 flex items-center gap-2">${product.price}</h3>
+                                                            <p className="text-[13px] font-medium text-slate-500 flex items-center gap-2">Color: <span style={{ backgroundColor: product?.color }} className="inline-block w-4 h-4 rounded-sm"></span></p>
                                                         </div>
                                                     </div>
                                                 </div>
