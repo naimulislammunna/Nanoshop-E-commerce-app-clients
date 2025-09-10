@@ -50,8 +50,7 @@ const ShopingCart = () => {
                                             <p className="text-[13px] font-medium text-slate-500 mt-1 flex items-center gap-2">{product?.ram}/{product?.storage} GB</p>
                                             <p className="text-[13px] font-medium text-slate-500 mt-1 flex items-center gap-2">Color: <span style={{backgroundColor: product?.color }} className={`inline-block w-4 h-4 rounded-sm `}></span></p>
                                             <div className="flex gap-4">
-                                                <p className="text-[13px] font-medium text-slate-500 mt-1">Quantity: {product?.quantity}</p>
-                                            <p className="text-[13px] font-medium text-slate-500 mt-1"><span className="text-red-500"> $  {product?.price}</span></p>
+                                                <p className="text-[13px] font-medium text-slate-500 mt-1">Quantity: <span className="text-red-500">{product?.quantity}</span></p>
                                             </div>
                                         </div>
                                     </div>

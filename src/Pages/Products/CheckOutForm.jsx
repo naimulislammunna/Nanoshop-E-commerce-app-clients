@@ -4,34 +4,39 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import usePriceCalculation from "../../Hooks/usePriceCalculation";
 import useCartData from "../../Hooks/useCartData";
+import { useForm } from "react-hook-form";
 
 const CheckOutForm = () => {
-    const singleData = useLoaderData();
+    const singleData = useLoaderData([]);
     const { cartData, isLoading } = useCartData();
     const [divisions, setDivisions] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [divisionId, setDivisionId] = useState(1);
 
+    const { totalPrice, sumOfPrice: subtotal, totalQuantity, discountPrice, handleDiscountPrice } = usePriceCalculation();
 
-
-    const { totalPrice: prices, totalQuantity } = usePriceCalculation();
-    const { quantity, price } = useAuth();
-    const shippingCharge = 25;
-    const subtotal = prices ? (prices + shippingCharge) : (price + shippingCharge);
-    const productQuantity = totalQuantity ? totalQuantity : quantity;
     const [discountValue, setDiscountValue] = useState();
-    const [discountPrice, setDiscountPrice] = useState();
-    const [totalPrice, setTotalPrice] = useState(subtotal);
 
-    const handleDiscountPrice = () => {
-        if (discountValue == "MERN") {
-            const discount = (price * 0.1).toFixed(2);
-            setDiscountPrice(discount);
-            const totalPrice = (price - discount) + shippingCharge;
-            setTotalPrice(totalPrice);
-        }
+    // const { totalPrice: prices, totalQuantity } = usePriceCalculation();
+    // const { quantity, price } = useAuth();
+    // const shippingCharge = 25;
 
-    }
+    // const subtotal = prices ? (prices + shippingCharge) : (price + shippingCharge);
+
+    // const productQuantity = totalQuantity ? totalQuantity : quantity;
+    // 
+    // const [discountPrice, setDiscountPrice] = useState();
+    // const [totalPrice, setTotalPrice] = useState(subtotal);
+
+    // const handleDiscountPrice = () => {
+    //     if (discountValue == "MERN") {
+    //         const discount = (price * 0.1).toFixed(2);
+    //         setDiscountPrice(discount);
+    //         const totalPrice = (price - discount) + shippingCharge;
+    //         setTotalPrice(totalPrice);
+    //     }
+
+    // }
 
 
     useEffect(() => {
@@ -51,6 +56,10 @@ const CheckOutForm = () => {
         setDivisionId(selectedId)
     };
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data) => console.log('hook form', data)
+
+
     if (isLoading) return <Loader />
     return (
         <div className="container">
@@ -59,52 +68,58 @@ const CheckOutForm = () => {
 
                     <div className="grid md:grid-cols-2  gap-y-12 gap-x-8 lg:gap-x-12">
                         <div className="">
-                            <form>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div>
                                     <h2 className="text-xl text-slate-900 font-semibold mb-6">Delivery Details</h2>
                                     <div className="grid lg:grid-cols-1 gap-y-6 gap-x-4">
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Your Name</label>
-                                            <input type="text" placeholder="Enter First Name"
+                                            <input {...register('name', { required: true })}
+                                                type="text" placeholder="Enter Name"
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            {errors.name && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Email</label>
-                                            <input type="email" placeholder="Enter Email"
+                                            <input type="email" {...register('email', { required: true })} placeholder="Enter Email"
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            {errors.email && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Phone No.</label>
-                                            <input type="number" placeholder="Enter Phone No."
+                                            <input type="number" {...register('number', { required: true })} placeholder="Enter Phone No."
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            {errors.number && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Address Details</label>
-                                            <input type="text" placeholder="Enter Address Line"
+                                            <input type="text" {...register('address', { required: true })} placeholder="Enter Address Line"
                                                 className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
+                                            {errors.address && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Division</label>
-                                            <select onChange={(e) => handleDivisionChange(e)} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
+                                            <select onChange={(e) => handleDivisionChange(e)}  {...register('division', { required: true })} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
 
                                                 {
-                                                    divisions.map((division, idx) => <option key={idx} value={division.id}>{division.name}</option>)
+                                                    divisions.map((division, idx) => <option key={idx} value={division.name}>{division.name}</option>)
                                                 }
                                             </select>
+                                            {errors.division && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">State</label>
-                                            <select name="" id="" className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
+                                            <select name="" id="" {...register('district', { required: true })} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
 
                                                 {
                                                     districts.map((district, idx) => <option key={idx} value={district.name}>{district.name}</option>)
                                                 }
                                             </select>
+                                            {errors.district && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
+                                        <button type="submit" className="btn">submit</button>
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
 
@@ -179,7 +194,7 @@ const CheckOutForm = () => {
                                 <div className="flex gap-4">
                                     <input onChange={(e) => setDiscountValue(e.target.value)} type="text" name="discount" placeholder="Promo code"
                                         className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" />
-                                    <button onClick={handleDiscountPrice} type='button' className="flex items-center justify-center font-medium tracking-wide bg-slate-900 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer">
+                                    <button onClick={() => handleDiscountPrice(discountValue)} type='button' className="flex items-center justify-center font-medium tracking-wide bg-slate-900 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer">
                                         Apply
                                     </button>
                                 </div>
@@ -187,7 +202,7 @@ const CheckOutForm = () => {
                             </div>
                             <h2 className="text-xl text-slate-900 font-semibold mb-6 mt-6">Order Summary</h2>
                             <ul className="text-slate-500 font-medium space-y-4">
-                                <li className="flex flex-wrap gap-4 text-sm">Item Quantity<span className="ml-auto font-semibold text-slate-900">{productQuantity}</span></li>
+                                <li className="flex flex-wrap gap-4 text-sm">Item Quantity<span className="ml-auto font-semibold text-slate-900">{totalQuantity}</span></li>
                                 <li className="flex flex-wrap gap-4 text-sm">Subtotal <span className="ml-auto font-semibold text-slate-900">${subtotal}</span></li>
                                 <li className="flex flex-wrap gap-4 text-sm">Discount <span className="ml-auto font-semibold text-slate-900">${discountPrice}</span></li>
                                 <li className="flex flex-wrap gap-4 text-sm">Shipping <span className="ml-auto font-semibold text-slate-900">$25.00</span></li>
