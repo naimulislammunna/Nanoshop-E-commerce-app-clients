@@ -23,6 +23,7 @@ import About from "../AboutUs/About";
 import ContactUs from "../Contacts/ContactUs";
 import CheckOutForm from "../Pages/Products/CheckOutForm";
 import ShopingCart from "../Pages/UserDashboard/ShopingCart";
+import MyAccount from "../Pages/UserDashboard/MyAccount";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Wishlist/>
+                element: <MyAccount/>
             },
             {
                 path: 'my-cart',

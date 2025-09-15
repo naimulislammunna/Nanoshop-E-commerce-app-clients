@@ -5,9 +5,9 @@ const UserDashboard = () => {
     return (
         <div>
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="w-full flex grid-cols-12  gap-5 min-h-screen h-full">
+            <div className="w-[90%] mx-auto flex grid-cols-12  gap-5 min-h-screen h-full">
                 {/* Navbar */}
-                <div className="col-span-4 bg-gray-200">
+                <div className="col-span-4">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg

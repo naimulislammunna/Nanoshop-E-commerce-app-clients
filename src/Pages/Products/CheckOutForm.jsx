@@ -1,7 +1,6 @@
 import Loader from "../../Components/Loader";
 import { Link, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useAuth from "../../Hooks/useAuth";
 import usePriceCalculation from "../../Hooks/usePriceCalculation";
 import useCartData from "../../Hooks/useCartData";
 import { useForm } from "react-hook-form";
@@ -166,7 +165,7 @@ const CheckOutForm = () => {
                                     <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
                                         <div>
                                             <div className="flex items-center">
-                                                <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card" checked />
+                                                <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card"/>
                                                 <label htmlFor="card" className="ml-4 flex gap-2 cursor-pointer">
                                                     <img src="https://readymadeui.com/images/visa.webp" className="w-12" alt="card1" />
                                                     <img src="https://readymadeui.com/images/american-express.webp" className="w-12" alt="card2" />
@@ -181,11 +180,11 @@ const CheckOutForm = () => {
                                             <div className="flex items-center">
                                                 <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="paypal" />
                                                 <label htmlFor="paypal" className="ml-4 flex gap-2 cursor-pointer">
-                                                    <img src="https://readymadeui.com/images/paypal.webp" className="w-20" alt="paypalCard" />
+                                                    <img src="https://i.postimg.cc/NMvB827S/Cash-On-Delivery-Cod-Fast-Car-With-Flat-Design-Style-Orange-Color-Cash-On-Delivery-Cash-Delivery.png" className="w-20" alt="paypalCard" />
                                                 </label>
                                             </div>
                                         </div>
-                                        <p className="mt-4 text-sm text-slate-500 font-medium">Pay with your paypal account</p>
+                                        <p className="mt-4 text-sm text-slate-500 font-medium">Cash on Delivery</p>
                                     </div>
                                 </div>
                             </div>

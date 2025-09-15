@@ -15,23 +15,23 @@ const Products = () => {
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
 
-    const { data: products, isLoading } = useQuery({
+    const { data: products = [], isLoading } = useQuery({
         queryKey: ['produtct', search, sort, brand, category],
         queryFn: async () => {
             const res = await axiosPublic.get(`/all-products?search=${search}&sort=${sort}&brand=${brand}&category=${category}`)
             return res.data;
         }
     })
-    
 
-    const handleReset=()=>{
+
+    const handleReset = () => {
         setBrand('')
         setSearch('')
         setCategory('')
         setSort('')
     }
 
-    if(isLoading) return <Loader/>
+    if (isLoading) return <Loader />
 
     return (
         <div className="container">
@@ -41,14 +41,14 @@ const Products = () => {
             </div>
             <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-12 lg:col-span-3">
-                    <FilterBar setBrandValue={(e) => setBrand(e)} setCategoryValue={(e) => setCategory(e)} products={products}/>
+                    <FilterBar setBrandValue={(e) => setBrand(e)} setCategoryValue={(e) => setCategory(e)} products={products} />
                     <div>
-                    <button onClick={handleReset} className="btn bg-sky-950 text-white border-none w-full mx-auto my-4 hover:bg-primary">Reset</button>
+                        <button onClick={handleReset} className="btn bg-sky-950 text-white border-none w-full mx-auto my-4 hover:bg-primary">Reset</button>
                     </div>
                 </div>
                 <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 col-span-9 mx-auto">
                     {
-                      products?.result.length ? <>{products?.result?.map(product => <ProductCard key={product._id} item={product}></ProductCard>)} </> : <div className="min-h-full min-w-full col-span-10 justify-center items-center"><h1 className="text-xl text-center font-bold">No Products Found</h1></div>
+                        products?.result.length ? <>{products?.result?.map(product => <ProductCard key={product._id} item={product}></ProductCard>)} </> : <div className="min-h-full min-w-full col-span-10 justify-center items-center"><h1 className="text-xl text-center font-bold">No Products Found</h1></div>
                     }
                 </div>
             </div>
