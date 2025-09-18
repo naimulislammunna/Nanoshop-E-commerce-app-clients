@@ -24,6 +24,7 @@ import ContactUs from "../Contacts/ContactUs";
 import CheckOutForm from "../Pages/Products/CheckOutForm";
 import ShopingCart from "../Pages/UserDashboard/ShopingCart";
 import MyAccount from "../Pages/UserDashboard/MyAccount";
+import MyOrder from "../Pages/UserDashboard/MyOrder";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-cart',
                 element: <MyCart/>
+            },
+            {
+                path: 'order',
+                element: <MyOrder/>
             },
         ]
     },

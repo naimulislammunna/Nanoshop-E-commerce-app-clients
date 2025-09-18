@@ -5,9 +5,9 @@ const UserDashboard = () => {
     return (
         <div>
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="w-[90%] mx-auto flex grid-cols-12  gap-5 min-h-screen h-full">
+            <div className="w-[96%] mx-auto flex grid-cols-12  gap-5 min-h-screen h-full">
                 {/* Navbar */}
-                <div className="col-span-4">
+                <div className="col-span-4 w-[300px]">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg
@@ -24,22 +24,22 @@ const UserDashboard = () => {
                         </label>
                     </div>
                     <div className="hidden flex-none lg:block">
-                        <ul className="menu menu-horizontal">
+                        <ul className="w-full menu menu-horizontal">
                             {/* Navbar menu content here */}
-                            <UserSidebar/>
+                            <UserSidebar />
                         </ul>
                     </div>
                 </div>
                 {/* Page content here */}
                 <div className="flex-1">
-                <Outlet/>
+                    <Outlet />
                 </div>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 min-h-full w-80 p-4">
                     {/* Sidebar content here */}
-                    <UserSidebar/>
+                    <UserSidebar />
                 </ul>
             </div>
         </div>
