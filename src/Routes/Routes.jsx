@@ -16,8 +16,6 @@ import ManageUsers from "../Pages/AdminDashboard/ManageUsers";
 import UpdateProducts from "../Pages/SellerDashboard/UpdateProducts";
 import HomeLayout from "../Layout/HomeLayout";
 import UserDashboard from "../Layout/UserDashboard";
-import Wishlist from "../Pages/UserDashboard/Wishlist";
-import MyCart from "../Pages/UserDashboard/MyCart";
 import BuyerRoutes from "./BuyerRoutes";
 import About from "../AboutUs/About";
 import ContactUs from "../Contacts/ContactUs";
@@ -81,10 +79,6 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <MyAccount/>
-            },
-            {
-                path: 'my-cart',
-                element: <MyCart/>
             },
             {
                 path: 'order',
