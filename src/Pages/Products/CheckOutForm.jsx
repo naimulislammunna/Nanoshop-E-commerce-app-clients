@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import usePriceCalculation from "../../Hooks/usePriceCalculation";
 import useCartData from "../../Hooks/useCartData";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CheckOutForm = () => {
+    const axiosSecure = useAxiosSecure();
     const singleData = useLoaderData([]);
     const { cartData, isLoading } = useCartData();
+    const [formData, setFormData] = useState([]);
+    
     const [divisions, setDivisions] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [divisionId, setDivisionId] = useState(1);
@@ -15,6 +19,7 @@ const CheckOutForm = () => {
     const { totalPrice, sumOfPrice: subtotal, totalQuantity, discountPrice, handleDiscountPrice } = usePriceCalculation();
 
     const [discountValue, setDiscountValue] = useState();
+    
 
     // const { totalPrice: prices, totalQuantity } = usePriceCalculation();
     // const { quantity, price } = useAuth();
@@ -48,16 +53,34 @@ const CheckOutForm = () => {
         fetch(`https://bdapi.vercel.app/api/v.1/district/${divisionId}`)
             .then(res => res.json())
             .then(data => setDistricts(data.data))
-    }, [divisions, divisionId])
+    }, [divisionId])
 
     const handleDivisionChange = (e) => {
-        const selectedId = parseInt(e.target.value);
-        setDivisionId(selectedId)
+        const selectedId = JSON.parse(e.target.value);
+        setDivisionId(parseInt(selectedId.id))
     };
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => console.log('hook form', data)
+    
+    const onSubmit = (data) => { setFormData(data) }
 
+    const handleOrder = async () => {
+        const doc = {
+            cartData,
+            formData,
+            subtotal,
+            totalPrice,
+            totalQuantity,
+            status : 'pending',
+            date : new Date().toDateString()
+        }
+        
+        
+
+        const res = axiosSecure.patch("/update-order", doc);
+        console.log(res);
+        
+    }
 
     if (isLoading) return <Loader />
     return (
@@ -98,16 +121,16 @@ const CheckOutForm = () => {
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Division</label>
-                                            <select onChange={(e) => handleDivisionChange(e)}  {...register('division', { required: true })} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
+                                            <select  {...register('division', { required: true , onChange: (e) => handleDivisionChange(e)})}  className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" >
 
                                                 {
-                                                    divisions.map((division, idx) => <option key={idx} value={division.name}>{division.name}</option>)
+                                                    divisions.map((division, idx) => <option key={idx} value={JSON.stringify({id: division.id , name: division.name})}> {division.name}</option>)
                                                 }
                                             </select>
-                                            {errors.division && <span className="text-red-600 text-sm my-1">This field is required</span>}
+                                            {errors.divi && <span className="text-red-600 text-sm my-1">This field is required</span>}
                                         </div>
                                         <div>
-                                            <label className="text-sm text-slate-900 font-medium block mb-2">State</label>
+                                            <label className="text-sm text-slate-900 font-medium block mb-2">District</label>
                                             <select name="" id="" {...register('district', { required: true })} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600">
 
                                                 {
@@ -209,7 +232,7 @@ const CheckOutForm = () => {
                                 <li className="flex flex-wrap gap-4 text-[15px] font-semibold text-slate-900">Total <span className="ml-auto">${totalPrice}</span></li>
                             </ul>
                             <div className="space-y-4 mt-8">
-                                <button type="button" className="rounded-md px-4 py-2.5 my-2 w-full text-sm font-medium tracking-wide bg-primary hover:bg-slate-900 text-white cursor-pointer">Complete Purchase</button>
+                                <button onClick={handleOrder} type="button" className="rounded-md px-4 py-2.5 my-2 w-full text-sm font-medium tracking-wide bg-primary hover:bg-slate-900 text-white cursor-pointer">Complete Purchase</button>
                                 <Link to="/all-products">
                                     <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-gray-100 hover:bg-gray-200 border border-gray-300 text-slate-900 cursor-pointer">Continue Shopping</button>
                                 </Link>

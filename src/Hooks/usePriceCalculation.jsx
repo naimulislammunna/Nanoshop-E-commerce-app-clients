@@ -11,7 +11,7 @@ const usePriceCalculation = () => {
     const prices = productPrice.map((num, i) => num * productQuantity[i]);
     const sumOfPrice = prices.reduce((sum, price) => sum + price, 0);
     const shippingCharge = 25;
-    const subtotal = sumOfPrice + shippingCharge;
+    const subtotal = (sumOfPrice + shippingCharge).toFixed(2);
     const [totalPrice, setTotalPrice] = useState(subtotal);
 
     const totalQuantity = productQuantity.reduce((sum, quantity) => sum + quantity, 0);

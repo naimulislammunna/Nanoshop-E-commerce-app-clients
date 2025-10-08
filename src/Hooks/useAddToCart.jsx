@@ -21,8 +21,6 @@ const useAddToCart = () => {
             quantity
         }
         const res = await axiosSecure.patch(`/update-cart`, doc);
-        console.log(res);
-        
 
         if (res.data.success == true) {
             toast.success(res.data.message);
