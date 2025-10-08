@@ -23,7 +23,7 @@ const usePriceCalculation = () => {
             const discount = (totalPrice * 0.1).toFixed(2);
             setDiscountPrice(discount);
             const totalPriceAfterDiscount = (totalPrice - discount) + shippingCharge;
-            setTotalPrice(totalPriceAfterDiscount);
+            setTotalPrice(totalPriceAfterDiscount.toFixed(2));
         }
 
     }
