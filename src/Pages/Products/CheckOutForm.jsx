@@ -6,23 +6,24 @@ import useCartData from "../../Hooks/useCartData";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const CheckOutForm = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const singleData = useLoaderData([]);
     const { cartData, isLoading } = useCartData();
-    
+
     const [divisions, setDivisions] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [divisionId, setDivisionId] = useState(1);
     const [divisionName, setDivisionName] = useState("");
-    
-    
+
+
     const { totalPrice, sumOfPrice: subtotal, totalQuantity, discountPrice, handleDiscountPrice } = usePriceCalculation();
 
     const [discountValue, setDiscountValue] = useState();
-    
+
 
     // const { totalPrice: prices, totalQuantity } = usePriceCalculation();
     // const { quantity, price } = useAuth();
@@ -65,34 +66,40 @@ const CheckOutForm = () => {
     };
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    
+
     // const onSubmit = (data) => { setFormData(data) }
 
     const handleOrder = async (data) => {
-       const {name, email, number, address, district} = data;
+        const { name, email, number, address, district } = data;
 
         const formData = {
             name,
             email,
             number,
             address,
-            division : divisionName,
-            district 
+            division: divisionName,
+            district
         }
 
         const doc = {
-            userEmail : user.email,
+            userEmail: user.email,
             cartData,
             formData,
             subtotal,
             totalPrice,
             totalQuantity,
-            status : 'pending',
-            date : new Date().toDateString()
+            status: 'pending',
+            date: new Date().toLocaleDateString()
         }
         const res = await axiosSecure.patch(`/update-order`, doc);
         console.log(res);
-        
+        if (res.data.success == true) {
+            toast.success(res.data.message);
+        }
+        else {
+            toast.error(res.data.message);
+        }
+
     }
 
     if (isLoading) return <Loader />
@@ -134,10 +141,10 @@ const CheckOutForm = () => {
                                         </div>
                                         <div>
                                             <label className="text-sm text-slate-900 font-medium block mb-2">Division</label>
-                                            <select  {...register('division', { required: true , onChange: (e) => handleDivisionChange(e)})}  className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" >
+                                            <select  {...register('division', { required: true, onChange: (e) => handleDivisionChange(e) })} className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600" >
 
                                                 {
-                                                    divisions.map((division, idx) => <option key={idx} value={JSON.stringify({id: division.id , name: division.name})}> {division.name}</option>)
+                                                    divisions.map((division, idx) => <option key={idx} value={JSON.stringify({ id: division.id, name: division.name })}> {division.name}</option>)
                                                 }
                                             </select>
                                             {errors.divi && <span className="text-red-600 text-sm my-1">This field is required</span>}
@@ -200,7 +207,7 @@ const CheckOutForm = () => {
                                     <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
                                         <div>
                                             <div className="flex items-center">
-                                                <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card"/>
+                                                <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card" />
                                                 <label htmlFor="card" className="ml-4 flex gap-2 cursor-pointer">
                                                     <img src="https://readymadeui.com/images/visa.webp" className="w-12" alt="card1" />
                                                     <img src="https://readymadeui.com/images/american-express.webp" className="w-12" alt="card2" />
