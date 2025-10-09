@@ -1,6 +1,8 @@
 
 const OrderSummaryModal = ({ order }) => {
     const { status, date, subtotal, totalPrice, formData, cartData, } = order;
+    console.log(order);
+    
     const { name,
         number,
         address,
