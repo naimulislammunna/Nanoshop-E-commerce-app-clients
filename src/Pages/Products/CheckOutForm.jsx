@@ -92,7 +92,6 @@ const CheckOutForm = () => {
             date: new Date().toLocaleDateString()
         }
         const res = await axiosSecure.patch(`/update-order`, doc);
-        console.log(res);
         if (res.data.success == true) {
             toast.success(res.data.message);
         }
@@ -100,6 +99,18 @@ const CheckOutForm = () => {
             toast.error(res.data.message);
         }
 
+       
+        
+
+    }
+
+    const handlePayment = async () =>{
+         const response = await axiosSecure.post(`/payment`, {name: "munna", age: "26"})
+        const redirectURL = response.data.paymentURL;
+
+        if(redirectURL){
+            window.location.replace(redirectURL)
+        }
     }
 
     if (isLoading) return <Loader />
@@ -220,6 +231,17 @@ const CheckOutForm = () => {
                                     <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
                                         <div>
                                             <div className="flex items-center">
+                                                <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="card" />
+                                                <label htmlFor="card" className="ml-4 flex gap-2 cursor-pointer">
+                                                    <img src="https://sslcommerz.com/wp-content/uploads/2021/11/logo.png" className="w-32" alt="card1" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <p className="mt-4 text-sm text-slate-500 font-medium">Pay with sslcommerz</p>
+                                    </div>
+                                    <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
+                                        <div>
+                                            <div className="flex items-center">
                                                 <input type="radio" name="method" className="w-5 h-5 cursor-pointer" id="paypal" />
                                                 <label htmlFor="paypal" className="ml-4 flex gap-2 cursor-pointer">
                                                     <img src="https://i.postimg.cc/NMvB827S/Cash-On-Delivery-Cod-Fast-Car-With-Flat-Design-Style-Orange-Color-Cash-On-Delivery-Cash-Delivery.png" className="w-20" alt="paypalCard" />
@@ -251,7 +273,7 @@ const CheckOutForm = () => {
                                 <li className="flex flex-wrap gap-4 text-[15px] font-semibold text-slate-900">Total <span className="ml-auto">${totalPrice}</span></li>
                             </ul>
                             <div className="space-y-4 mt-8">
-                                <button onClick={handleSubmit(handleOrder)} type="button" className="rounded-md px-4 py-2.5 my-2 w-full text-sm font-medium tracking-wide bg-primary hover:bg-slate-900 text-white cursor-pointer">Complete Purchase</button>
+                                <button onClick={handlePayment} type="button" className="rounded-md px-4 py-2.5 my-2 w-full text-sm font-medium tracking-wide bg-primary hover:bg-slate-900 text-white cursor-pointer">Complete Purchase</button>
                                 <Link to="/all-products">
                                     <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm font-medium tracking-wide bg-gray-100 hover:bg-gray-200 border border-gray-300 text-slate-900 cursor-pointer">Continue Shopping</button>
                                 </Link>
