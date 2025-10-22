@@ -39,7 +39,7 @@ const About = () => {
             <div className="grid grid-cols-3 gap-6">
                 {
                     about.map((item , idx)=> <div key={idx} className="card w-auto bg-base-100 card-md shadow-sm">
-                        <div className="card-body">
+                        <div className="card-body border border-primary rounded-xl">
                             <h2 className="card-title text-primary">{item.title}</h2>
                             <p>{item.description}</p>
                         </div>
